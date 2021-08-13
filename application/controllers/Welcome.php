@@ -86,7 +86,7 @@ class Welcome extends CI_Controller
 
 	private function isExclusion($user)
 	{
-		$lists = ['AgenciaQvaCasas'];
+		$lists = [];
 		foreach ($lists as $list) {
 			if ($user === $list) {
 				return True;
