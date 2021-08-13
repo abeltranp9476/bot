@@ -3,7 +3,7 @@
 
 class Newmembers_model extends CI_Model
 {
-	public $token = '05632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
+	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
 
 	public function notificar($mensaje, $chatId)
 	{
