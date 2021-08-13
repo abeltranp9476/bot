@@ -13,9 +13,7 @@
 	},
 	"scripts": {
 		"post-root-package-install": [
-			"@php -r \"file_exists(__DIR__.'/application/config/database.php') || copy(__DIR__.'/application/config/database.example.php', __DIR__.'/application/config/database.php');\"",
-			"@php -r \"file_exists(__DIR__.'/application/views/publicidad.php') || copy(__DIR__.'/application/views/publicidad.test.php', __DIR__.'/application/views/publicidad.php');\"",
-			"@php -r \"file_exists(__DIR__.'/application/views/blog/publicidad.php') || copy(__DIR__.'/application/views/blog/publicidad.test.php', __DIR__.'/application/views/blog/publicidad.php');\""
+			"@php -r \"file_exists(__DIR__.'/application/config/database.php') || copy(__DIR__.'/application/config/database.example.php', __DIR__.'/application/config/database.php');\""
 		],
 		"start": "php -S localhost:8000"
 	}
