@@ -13,6 +13,7 @@ class Welcome extends CI_Controller
 		$this->load->view('welcome_message');
 	}
 
+
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
@@ -29,10 +30,8 @@ class Welcome extends CI_Controller
 		$newparticipant = $request->message->new_chat_participant->id;
 		$leftparticipant = $request->message->left_chat_member->id;
 
-		if ($this->newmembers->isActiveGroup($group) && !$this->isExclusion($fromUser)) {
-			if ($this->isRecommendedAll($group, $fromId) && $this->CheckType($type)) {
-				//$this->newmembers->notificar('Si');
-			} else {
+		if ($this->newmembers->isActiveGroup($group) && !$this->isExclusion($fromUser) && $this->CheckType($type)) {
+			if (!$this->isRecommendedAll($group, $fromId)) {
 				if (!$text == '') {
 					$this->newmembers->eliminar($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
@@ -92,6 +91,19 @@ class Welcome extends CI_Controller
 				return True;
 			}
 		}
+		return False;
+	}
+
+	private function filter($text)
+	{
+		if (preg_match("/((http|https|www)[^\s]+)/", $text)) {
+			return True;
+		}
+
+		if (preg_match("/(@[^\s]+)/", $text)) {
+			return True;
+		}
+
 		return False;
 	}
 }
