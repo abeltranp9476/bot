@@ -41,6 +41,7 @@ class Welcome extends CI_Controller
 						'text' => "Hola @$fromUser , no puedes escribir en este grupo hasta que no agregues $total de tus contactos.",
 						'reply_markup' => $reply_markup
 					]);
+					exit;
 				}
 			}
 
@@ -53,6 +54,7 @@ class Welcome extends CI_Controller
 					'text' => "Hola @$fromUser , no están permitido enlaces ni menciones en este grupo.",
 					'reply_markup' => $reply_markup
 				]);
+				exit;
 			}
 
 			//Cuando alguien agrega un nuevo participante
@@ -63,11 +65,13 @@ class Welcome extends CI_Controller
 					'id_participant_added' => $newparticipant
 				];
 				$this->newmembers->create($data);
+				exit;
 			}
 
 			//Cuando un participante con usuarios añadidos abandona el grupo
 			if (!empty($leftparticipant)) {
 				$this->newmembers->delete($leftparticipant, $group);
+				exit;
 			}
 		}
 	}
