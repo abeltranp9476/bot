@@ -3,25 +3,25 @@
 
 class Newmembers_model extends CI_Model
 {
+	public $token = '05632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
+
 	public function notificar($mensaje, $chatId)
 	{
-		$token = "705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM";
 		$data = [
 			'text' => "$mensaje",
 			'chat_id' => $chatId
 		];
-		$resultado = file_get_contents("https://api.telegram.org/bot$token/sendMessage?" . http_build_query($data));
+		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/sendMessage?" . http_build_query($data));
 		return $resultado;
 	}
 
 	public function eliminar($messageId, $chatId)
 	{
-		$token = "705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM";
 		$data = [
 			'message_id' => $messageId,
 			'chat_id' => $chatId
 		];
-		$resultado = file_get_contents("https://api.telegram.org/bot$token/deleteMessage?" . http_build_query($data));
+		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/deleteMessage?" . http_build_query($data));
 		return $resultado;
 	}
 
@@ -35,6 +35,10 @@ class Newmembers_model extends CI_Model
 		$this->db->where('group_name', $group);
 		$this->db->where('from_id', $userId);
 		$this->db->delete('newmembers');
+	}
+
+	public function cleanTable()
+	{
 	}
 
 	public function countAll($group, $userId)
