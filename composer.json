@@ -1,8 +1,8 @@
 {
-	"name": "detecton/detecton-web",
+	"name": "abeltranp9476/bot",
 	"type": "project",
-	"description": "Sitio web del Detecton Anti-Malware",
-	"homepage": "https://github.com/detecton/detecton-web",
+	"description": "Proyecto de Bot de Telegram",
+	"homepage": "https://bot.detecton.us",
 	"require": {
 		"irazasyed/telegram-bot-sdk": "^2.0"
 	},
