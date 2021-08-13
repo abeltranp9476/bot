@@ -44,6 +44,17 @@ class Welcome extends CI_Controller
 				}
 			}
 
+			//Filtro los mensajes
+			if ($this->filter($text)) {
+				$this->newmembers->eliminar($textId, $chatId);
+				$reply_markup = $telegram->replyKeyboardHide();
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Hola @$fromUser , no están permitido enlaces ni menciones en este grupo.",
+					'reply_markup' => $reply_markup
+				]);
+			}
+
 			//Cuando alguien agrega un nuevo participante
 			if (!empty($newparticipant)) {
 				$data = [
