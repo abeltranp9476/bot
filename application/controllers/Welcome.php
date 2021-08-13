@@ -5,7 +5,7 @@ use Telegram\Bot\Api;
 
 class Welcome extends CI_Controller
 {
-	public $usersAdd = 20;
+	public $usersAdd = 2;
 	public $userCounter = 0;
 
 	public function index()
