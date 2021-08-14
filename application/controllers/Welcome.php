@@ -20,7 +20,6 @@ class Welcome extends CI_Controller
 		echo "Bot Server";
 	}
 
-
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
@@ -140,6 +139,10 @@ class Welcome extends CI_Controller
 		}
 
 		if (preg_match("/(@[^\s]+)/", $text)) {
+			return True;
+		}
+
+		if (preg_match("/([a-z:0-9])([.][^\s]+)([a-z])/", $text)) {
 			return True;
 		}
 
