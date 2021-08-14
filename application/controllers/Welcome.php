@@ -7,7 +7,11 @@ class Welcome extends CI_Controller
 {
 	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
 
-	public $listsExclusion = ['DantesV3', 'GroupAnonymousBot'];
+	public $listsExclusion = [
+		['username' => 'DantesV3', 'group' => 'comprayventadecasas'],
+		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas'],
+		['username' => 'AgenciaQvaCasas', 'group' => 'qvacasasgrupo']
+	];
 
 	public $usersAdd = 20;
 	public $userCounter = 0;
@@ -37,7 +41,7 @@ class Welcome extends CI_Controller
 		$isBot = $request->message->new_chat_participant->is_bot;
 		$leftparticipant = $request->message->left_chat_member->id;
 
-		if ($this->newmembers->isActiveGroup($group) && !$this->isExclusion($fromUser) && $this->CheckType($type)) {
+		if ($this->newmembers->isActiveGroup($group) && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
 				if (!$text == '') {
 					$this->delete($textId, $chatId);
@@ -121,11 +125,10 @@ class Welcome extends CI_Controller
 		return False;
 	}
 
-	private function isExclusion($user)
+	private function isExclusion($user, $group)
 	{
-
 		foreach ($this->listsExclusion as $list) {
-			if ($user === $list) {
+			if ($user === $list['username'] && $group === $list['group']) {
 				return True;
 			}
 		}
