@@ -3,29 +3,6 @@
 
 class Newmembers_model extends CI_Model
 {
-	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
-
-	public function notificar($mensaje, $chatId)
-	{
-		$data = [
-			'text' => "$mensaje",
-			'chat_id' => $chatId
-		];
-
-		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/sendMessage?" . http_build_query($data));
-		return $resultado;
-	}
-
-	public function eliminar($messageId, $chatId)
-	{
-		$data = [
-			'message_id' => $messageId,
-			'chat_id' => $chatId
-		];
-
-		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/deleteMessage?" . http_build_query($data));
-		return $resultado;
-	}
 
 	public function create($data)
 	{

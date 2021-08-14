@@ -5,6 +5,8 @@ use Telegram\Bot\Api;
 
 class Welcome extends CI_Controller
 {
+	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
+
 	public $usersAdd = 20;
 	public $userCounter = 0;
 	public $deleteUserAddMessage = True;
@@ -18,7 +20,7 @@ class Welcome extends CI_Controller
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
-		$telegram = new Api('705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM');
+		$telegram = new Api($this->token);
 		$json = file_get_contents("php://input");
 		$request = json_decode($json, $assoc = false);
 		$group = $request->message->chat->username;
@@ -34,7 +36,7 @@ class Welcome extends CI_Controller
 		if ($this->newmembers->isActiveGroup($group) && !$this->isExclusion($fromUser) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
 				if (!$text == '') {
-					$this->newmembers->eliminar($textId, $chatId);
+					$this->delete($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$total = $this->usersAdd - $this->userCounter;
 					$telegram->sendMessage([
@@ -48,7 +50,7 @@ class Welcome extends CI_Controller
 
 			//Filtro los mensajes
 			if ($this->filter($text)) {
-				$this->newmembers->eliminar($textId, $chatId);
+				$this->delete($textId, $chatId);
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
@@ -67,7 +69,7 @@ class Welcome extends CI_Controller
 				];
 				$this->newmembers->create($data);
 				if ($this->deleteUserAddMessage) {
-					$this->newmembers->eliminar($textId, $chatId);
+					$this->delete($textId, $chatId);
 				}
 				exit;
 			}
@@ -124,5 +126,17 @@ class Welcome extends CI_Controller
 		}
 
 		return False;
+	}
+
+
+	private function delete($messageId, $chatId)
+	{
+		$data = [
+			'message_id' => $messageId,
+			'chat_id' => $chatId
+		];
+
+		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/deleteMessage?" . http_build_query($data));
+		return $resultado;
 	}
 }
