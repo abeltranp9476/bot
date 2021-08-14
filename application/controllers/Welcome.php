@@ -12,13 +12,13 @@ class Welcome extends CI_Controller
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas']
 	];
 
-	public $isActiveGroup = true;
-	public $isUsersAdd = true;
-	public $usersAdd = 20;
+	public $isActiveGroup;
+	public $isUsersAdd;
+	public $usersAdd;
 	public $userCounter = 0;
-	public $deleteUserAddMessage = true;
-	public $disableAddBots = true;
-	public $disableSpamm = true;
+	public $deleteUserAddMessage;
+	public $disableAddBots;
+	public $disableSpamm;
 
 	public function index()
 	{
