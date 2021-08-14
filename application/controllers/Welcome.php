@@ -25,6 +25,13 @@ class Welcome extends CI_Controller
 		echo "Bot Server";
 	}
 
+	public function test()
+	{
+		$this->load->model('newmembers_model', 'newmembers');
+		$config = $this->newmembers->getConfig('qvacasasgrupo');
+		echo var_dump($config);
+	}
+
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
