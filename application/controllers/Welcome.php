@@ -52,7 +52,7 @@ class Welcome extends CI_Controller
 		$this->disableAddBots = $config->is_disable_Add_Bots;
 		$this->disableSpamm = $config->is_disable_Spamm;
 
-		if ($this->isActiveGroup && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
+		if ($this->isActiveGroup == 1 && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
 				if ($this->isUsersAdd && !$text == '') {
 					$this->delete($textId, $chatId);
