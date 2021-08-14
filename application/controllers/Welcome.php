@@ -54,7 +54,7 @@ class Welcome extends CI_Controller
 		$config = $this->newmembers->getConfig($group);
 		$this->isActiveGroup = $config->active;
 		$this->isUsersAdd = $config->is_users_add;
-		$this->userCounter = $config->users_add;
+		$this->userAdd = $config->users_add;
 		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
 		$this->disableAddBots = $config->is_disable_Add_Bots;
 		$this->disableSpamm = $config->is_disable_Spamm;
