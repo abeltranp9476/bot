@@ -24,6 +24,8 @@ class Welcome extends CI_Controller
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
+		$this->load->model('telegramsession_model', 'tSession');
+		$this->load->model('groups_model', 'groups');
 
 		$telegram = new Api($this->token);
 		$json = file_get_contents("php://input");
@@ -106,26 +108,46 @@ class Welcome extends CI_Controller
 		} elseif ($type == 'private') {
 			//Aquí van los comandos del bot
 
+			if (substr($text, 0, 6) == '/start') {
+				if ($this->tSession->checkUser($fromId) == 0) {
+					$data = [
+						'user_id' => $fromId,
+						'command' => ''
+					];
+					$this->tSession->create($data);
+				}
+			}
+
 			if (substr($text, 0, 9) == '/register') {
-				$groupIn =  trim(preg_replace('/\/register/', '', $text));
+				if ($this->tSession->getCommand($fromId) == '') {
+					$data = [
+						'command' => '/register'
+					];
+					$this->tSession->update($fromId, $data);
 
-				$keyboard = [
-					['/register']
-				];
+					$reply_markup = $telegram->replyKeyboardHide();
 
-				$reply_markup = $telegram->replyKeyboardMarkup([
-					'keyboard' => $keyboard,
-					'resize_keyboard' => true,
-					'one_time_keyboard' => true
-				]);
+					$telegram->sendMessage([
+						'chat_id' => $chatId,
+						'text' => "Introduzcda el nombre de su grupo:",
+						'reply_markup' => $reply_markup
+					]);
 
-				$telegram->sendMessage([
-					'chat_id' => $chatId,
-					'text' => "Hola @$fromUser , se ha registrado su grupo: $groupIn. Por favor, contacte a la administración para proceder a activar su cuenta.",
-					'reply_markup' => $reply_markup
-				]);
-
-				exit;
+					exit;
+				} else {
+					$data = [
+						'group_name' => $text,
+						'user' => $fromId,
+						'active' => 0,
+						'is_users_add' => 1,
+						'users_add' => 20,
+						'is_delete_User_Add_Message' => 1,
+						'is_disable_Add_Bots' => 1,
+						'is_disable_Spamm' => 1
+					];
+					$this->groups->create($data);
+					exit;
+				}
 			}
 		}
 	}
