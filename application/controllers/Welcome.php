@@ -10,7 +10,7 @@ class Welcome extends CI_Controller
 	public $listsExclusion = [
 		['username' => 'DantesV3', 'group' => 'comprayventadecasas'],
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas'],
-		['username' => 'AgenciaQvaCasas', 'group' => 'qvacasasgrupo']
+		['username' => 'AgenciaQvaCasas', 'group' => 'qvacasasgrupo1']
 	];
 
 	public $usersAdd = 20;
