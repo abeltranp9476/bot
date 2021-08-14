@@ -11,6 +11,7 @@ class Welcome extends CI_Controller
 	public $userCounter = 0;
 	public $deleteUserAddMessage = True;
 	public $disableAddBots = True;
+	public $disableSpamm = True;
 
 	public function index()
 	{
@@ -51,7 +52,7 @@ class Welcome extends CI_Controller
 			}
 
 			//Filtro los mensajes
-			if ($this->filter($text)) {
+			if ($this->disableSpamm && $this->filter($text)) {
 				$this->delete($textId, $chatId);
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
