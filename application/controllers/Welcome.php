@@ -10,6 +10,7 @@ class Welcome extends CI_Controller
 	public $usersAdd = 20;
 	public $userCounter = 0;
 	public $deleteUserAddMessage = True;
+	public $disableAddBots = True;
 
 	public function index()
 	{
@@ -31,6 +32,7 @@ class Welcome extends CI_Controller
 		$text = $request->message->text;
 		$textId = $request->message->message_id;
 		$newparticipant = $request->message->new_chat_participant->id;
+		$isBot = $request->message->new_chat_participant->is_bot;
 		$leftparticipant = $request->message->left_chat_member->id;
 
 		if ($this->newmembers->isActiveGroup($group) && !$this->isExclusion($fromUser) && $this->CheckType($type)) {
@@ -62,6 +64,16 @@ class Welcome extends CI_Controller
 
 			//Cuando alguien agrega un nuevo participante
 			if (!empty($newparticipant)) {
+				//Chequeo que si está activado no agregar bots y si no es un bot procede.
+				if ($this->disableAddBots && $isBot) {
+					$telegram->sendMessage([
+						'chat_id' => $chatId,
+						'text' => "Hola @$fromUser , no puedes agregar bots al grupo.",
+						'reply_markup' => $reply_markup
+					]);
+					exit;
+				}
+
 				$data = [
 					'from_id' => $fromId,
 					'group_name' => $group,
