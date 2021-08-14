@@ -35,7 +35,7 @@ class Welcome extends CI_Controller
 		$this->userAdd = $config->users_add;
 		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
 		$this->disableAddBots = $config->is_disable_Add_Bots;
-		$this->disableSpamm = $config->is_disable_Spamm1;
+		$this->disableSpamm = $config->is_disable_Spamm;
 	}
 
 	public function recive()
