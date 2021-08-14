@@ -28,8 +28,14 @@ class Welcome extends CI_Controller
 	public function test()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
+		//Obteniendo configuracion y la hacemos global
 		$config = $this->newmembers->getConfig('qvacasasgrupo');
-		echo $config;
+		$this->isActiveGroup = $config->active;
+		$this->isUsersAdd = $config->is_users_add;
+		$this->userAdd = $config->users_add;
+		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
+		$this->disableAddBots = $config->is_disable_Add_Bots;
+		$this->disableSpamm = $config->is_disable_Spamm;
 	}
 
 	public function recive()
