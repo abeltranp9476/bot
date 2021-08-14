@@ -30,7 +30,9 @@ class Welcome extends CI_Controller
 		$this->load->model('newmembers_model', 'newmembers');
 		//Obteniendo configuracion y la hacemos global
 		$config = $this->newmembers->getConfig('qvacasasgrupo');
-		echo $config->active;
+		if ($config->active) {
+			echo "True";
+		}
 		$this->isUsersAdd = $config->is_users_add;
 		$this->userAdd = $config->users_add;
 		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
