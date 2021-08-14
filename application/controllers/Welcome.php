@@ -107,12 +107,12 @@ class Welcome extends CI_Controller
 			//Aquí van los comandos del bot
 
 			if (substr($text, 0, 9) == '/register') {
-				$groupIn =  trim(preg_replace('/register', '', $text));
+				$groupIn =  trim(preg_replace('/\/register/', '', $text));
 
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
-					'text' => "Hola @$fromUser , se ha registrado su usuario y grupo: $groupIn. Por favor, contacte a la administración para proceder a activar su cuenta.",
+					'text' => "Hola @$fromUser , se ha registrado su grupo: $groupIn. Por favor, contacte a la administración para proceder a activar su cuenta.",
 					'reply_markup' => $reply_markup
 				]);
 				exit;
