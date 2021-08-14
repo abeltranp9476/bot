@@ -54,7 +54,7 @@ class Welcome extends CI_Controller
 
 		if ($this->isActiveGroup == 1 && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
-				if ($this->isUsersAdd && !$text == '') {
+				if ($this->isUsersAdd == 1 && !$text == '') {
 					$this->delete($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$total = $this->usersAdd - $this->userCounter;
@@ -68,7 +68,7 @@ class Welcome extends CI_Controller
 			}
 
 			//Filtro los mensajes
-			if ($this->disableSpamm && $this->filter($text)) {
+			if ($this->disableSpamm == 1 && $this->filter($text)) {
 				$this->delete($textId, $chatId);
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
@@ -82,7 +82,7 @@ class Welcome extends CI_Controller
 			//Cuando alguien agrega un nuevo participante
 			if (!empty($newparticipant)) {
 				//Chequeo que si está activado no agregar bots y si no es un bot procede.
-				if ($this->disableAddBots && $isBot) {
+				if ($this->disableAddBots == 1 && $isBot) {
 					$this->banMember($newparticipant, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$telegram->sendMessage([
