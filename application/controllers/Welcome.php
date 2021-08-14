@@ -109,7 +109,7 @@ class Welcome extends CI_Controller
 			if (substr($text, 0, 9) == '/register') {
 				$groupIn =  trim(preg_replace('/\/register/', '', $text));
 
-				$keyboard = [[' Registrar ' => '/register']];
+				$keyboard = [' Registrar ' => '/register'];
 
 				$reply_markup = $telegram->replyKeyboardMarkup([
 					'keyboard' => $keyboard,
