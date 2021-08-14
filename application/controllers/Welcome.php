@@ -44,14 +44,7 @@ class Welcome extends CI_Controller
 		$isBot = $request->message->new_chat_participant->is_bot;
 		$leftparticipant = $request->message->left_chat_member->id;
 
-		//Obteniendo configuracion y la hacemos global
-		$config = $this->newmembers->getConfig($group);
-		$this->isActiveGroup = $config->active;
-		$this->isUsersAdd = $config->is_users_add;
-		$this->userAdd = $config->users_add;
-		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
-		$this->disableAddBots = $config->is_disable_Add_Bots;
-		$this->disableSpamm = $config->is_disable_Spamm;
+		$this->getConfig($group);
 
 		if ($this->isActiveGroup && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
@@ -162,6 +155,19 @@ class Welcome extends CI_Controller
 		}
 
 		return False;
+	}
+
+	private function getConfig($group)
+	{
+		$this->load->model('newmembers_model', 'newmembers');
+		//Obteniendo configuracion y la hacemos global
+		$config = $this->newmembers->getConfig($group);
+		$this->isActiveGroup = $config->active;
+		$this->isUsersAdd = $config->is_users_add;
+		$this->userAdd = $config->users_add;
+		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
+		$this->disableAddBots = $config->is_disable_Add_Bots;
+		$this->disableSpamm = $config->is_disable_Spamm;
 	}
 
 
