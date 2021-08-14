@@ -107,7 +107,7 @@ class Welcome extends CI_Controller
 			//Aquí van los comandos del bot
 
 			if (substr($text, 0, 9) == '/register') {
-				$groupIn =  trim(eregi_replace('/register', '', $text));
+				//$groupIn =  trim(eregi_replace('/register', '', $text));
 
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
