@@ -44,14 +44,15 @@ class Welcome extends CI_Controller
 		$isBot = $request->message->new_chat_participant->is_bot;
 		$leftparticipant = $request->message->left_chat_member->id;
 
-		$this->getConfig($group);
+		//Obteniendo configuracion y la hacemos global
+		$config = $this->newmembers->getConfig($group);
 
-		if ($this->isActiveGroup && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
+		if ($config->active && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
-				if ($this->isUsersAdd && !$text == '') {
+				if ($config->is_users_add && !$text == '') {
 					$this->delete($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
-					$total = $this->usersAdd - $this->userCounter;
+					$total = $config->users_add - $this->userCounter;
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
 						'text' => "Hola @$fromUser , no puedes escribir en este grupo hasta que no agregues $total de tus contactos.",
@@ -62,7 +63,7 @@ class Welcome extends CI_Controller
 			}
 
 			//Filtro los mensajes
-			if ($this->disableSpamm && $this->filter($text)) {
+			if ($config->is_disable_Spamm && $this->filter($text)) {
 				$this->delete($textId, $chatId);
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
@@ -76,7 +77,7 @@ class Welcome extends CI_Controller
 			//Cuando alguien agrega un nuevo participante
 			if (!empty($newparticipant)) {
 				//Chequeo que si está activado no agregar bots y si no es un bot procede.
-				if ($this->disableAddBots && $isBot) {
+				if ($config->is_disable_Add_Bots && $isBot) {
 					$this->banMember($newparticipant, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$telegram->sendMessage([
@@ -93,7 +94,7 @@ class Welcome extends CI_Controller
 					'id_participant_added' => $newparticipant
 				];
 				$this->newmembers->create($data);
-				if ($this->deleteUserAddMessage) {
+				if ($config->is_delete_User_Add_Message) {
 					$this->delete($textId, $chatId);
 				}
 				exit;
@@ -102,7 +103,9 @@ class Welcome extends CI_Controller
 			//Cuando un participante con usuarios añadidos abandona el grupo
 			if (!empty($leftparticipant)) {
 				$this->newmembers->delete($leftparticipant, $group);
-				$this->delete($textId, $chatId);
+				if ($config->is_delete_User_Add_Message) {
+					$this->delete($textId, $chatId);
+				}
 				exit;
 			}
 		}
@@ -156,20 +159,6 @@ class Welcome extends CI_Controller
 
 		return False;
 	}
-
-	private function getConfig($group)
-	{
-		$this->load->model('newmembers_model', 'newmembers');
-		//Obteniendo configuracion y la hacemos global
-		$config = $this->newmembers->getConfig($group);
-		$this->isActiveGroup = $config->active;
-		$this->isUsersAdd = $config->is_users_add;
-		$this->userAdd = $config->users_add;
-		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
-		$this->disableAddBots = $config->is_disable_Add_Bots;
-		$this->disableSpamm = $config->is_disable_Spamm;
-	}
-
 
 	private function delete($messageId, $chatId)
 	{
