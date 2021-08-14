@@ -29,15 +29,11 @@ class Newmembers_model extends CI_Model
 		return $query->num_rows();
 	}
 
-	public function isActiveGroup($group)
+	public function getConfig($group)
 	{
 		$this->db->select('active');
 		$this->db->where('group_name', $group);
 		$query = $this->db->get('groups');
-		$row = $query->row();
-		if ($row->active == 1) {
-			return True;
-		}
-		return False;
+		return $query->row();
 	}
 }

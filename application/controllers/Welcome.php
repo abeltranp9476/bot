@@ -12,11 +12,13 @@ class Welcome extends CI_Controller
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas']
 	];
 
-	public $usersAdd = 20;
+	public $isActiveGroup = false;
+	public $isUsersAdd = false;
+	public $usersAdd = 0;
 	public $userCounter = 0;
-	public $deleteUserAddMessage = True;
-	public $disableAddBots = True;
-	public $disableSpamm = True;
+	public $deleteUserAddMessage = false;
+	public $disableAddBots = false;
+	public $disableSpamm = false;
 
 	public function index()
 	{
@@ -26,6 +28,7 @@ class Welcome extends CI_Controller
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
+
 		$telegram = new Api($this->token);
 		$json = file_get_contents("php://input");
 		$request = json_decode($json, $assoc = false);
@@ -40,9 +43,18 @@ class Welcome extends CI_Controller
 		$isBot = $request->message->new_chat_participant->is_bot;
 		$leftparticipant = $request->message->left_chat_member->id;
 
-		if ($this->newmembers->isActiveGroup($group) && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
+		//Obteniendo configuracion y la hacemos global
+		$config = $this->newmembers->getConfig($group);
+		$this->isActiveGroup = $config->active;
+		$this->isUsersAdd = $config->is_users_add;
+		$this->userCounter = $config->users_add;
+		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
+		$this->disableAddBots = $config->is_disable_Add_Bots;
+		$this->disableSpamm = $config->is_disable_Spamm;
+
+		if ($this->isActiveGroup && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
-				if (!$text == '') {
+				if ($this->isUsersAdd && !$text == '') {
 					$this->delete($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$total = $this->usersAdd - $this->userCounter;
