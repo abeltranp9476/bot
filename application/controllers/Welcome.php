@@ -29,7 +29,7 @@ class Welcome extends CI_Controller
 	{
 		$this->load->model('newmembers_model', 'newmembers');
 		$config = $this->newmembers->getConfig('qvacasasgrupo');
-		echo var_dump($config);
+		echo $config;
 	}
 
 	public function recive()
