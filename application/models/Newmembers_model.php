@@ -16,6 +16,12 @@ class Newmembers_model extends CI_Model
 		$this->db->delete('newmembers');
 	}
 
+	public function update($group, $data)
+	{
+		$this->db->where('group_name', $group);
+		$query = $this->db->update('groups', $data);
+	}
+
 	public function cleanTable()
 	{
 	}

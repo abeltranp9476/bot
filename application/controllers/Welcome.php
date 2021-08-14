@@ -12,13 +12,8 @@ class Welcome extends CI_Controller
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas']
 	];
 
-	public $isActiveGroup = true;
-	public $isUsersAdd = true;
-	public $usersAdd = 20;
 	public $userCounter = 0;
-	public $deleteUserAddMessage = true;
-	public $disableAddBots = true;
-	public $disableSpamm = true;
+
 
 	public function index()
 	{
@@ -106,6 +101,20 @@ class Welcome extends CI_Controller
 				if ($config->is_delete_User_Add_Message) {
 					$this->delete($textId, $chatId);
 				}
+				exit;
+			}
+		} elseif ($type == 'private') {
+			//Aquí van los comandos del bot
+
+			if (substr($text, 0, 9) == '/register') {
+				$groupIn =  trim(eregi_replace('/register', '', $text));
+
+				$reply_markup = $telegram->replyKeyboardHide();
+				$telegram->sendMessage([
+					'chat_id' => $fromId,
+					'text' => "Hola @$fromUser , se ha registrado su usuario y grupo. Por favor, contacte a la administración para proceder a activar su cuenta.",
+					'reply_markup' => $reply_markup
+				]);
 				exit;
 			}
 		}
