@@ -25,20 +25,6 @@ class Welcome extends CI_Controller
 		echo "Bot Server";
 	}
 
-	public function test()
-	{
-		$this->load->model('newmembers_model', 'newmembers');
-		//Obteniendo configuracion y la hacemos global
-		$config = $this->newmembers->getConfig('qvacasasgrupo');
-		if ($config->active) {
-			echo "True";
-		}
-		$this->isUsersAdd = $config->is_users_add;
-		$this->userAdd = $config->users_add;
-		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
-		$this->disableAddBots = $config->is_disable_Add_Bots;
-		$this->disableSpamm = $config->is_disable_Spamm;
-	}
 
 	public function recive()
 	{
@@ -67,9 +53,9 @@ class Welcome extends CI_Controller
 		$this->disableAddBots = $config->is_disable_Add_Bots;
 		$this->disableSpamm = $config->is_disable_Spamm;
 
-		if ($this->isActiveGroup == 1 && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
+		if ($this->isActiveGroup && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
-				if ($this->isUsersAdd == 1 && !$text == '') {
+				if ($this->isUsersAdd && !$text == '') {
 					$this->delete($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$total = $this->usersAdd - $this->userCounter;
@@ -83,7 +69,7 @@ class Welcome extends CI_Controller
 			}
 
 			//Filtro los mensajes
-			if ($this->disableSpamm == 1 && $this->filter($text)) {
+			if ($this->disableSpamm && $this->filter($text)) {
 				$this->delete($textId, $chatId);
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
@@ -97,7 +83,7 @@ class Welcome extends CI_Controller
 			//Cuando alguien agrega un nuevo participante
 			if (!empty($newparticipant)) {
 				//Chequeo que si está activado no agregar bots y si no es un bot procede.
-				if ($this->disableAddBots == 1 && $isBot) {
+				if ($this->disableAddBots && $isBot) {
 					$this->banMember($newparticipant, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$telegram->sendMessage([
