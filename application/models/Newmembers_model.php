@@ -31,7 +31,7 @@ class Newmembers_model extends CI_Model
 
 	public function getConfig($group)
 	{
-		$this->db->select('active');
+		$this->db->select('*');
 		$this->db->where('group_name', $group);
 		$query = $this->db->get('groups');
 		return $query->row();
