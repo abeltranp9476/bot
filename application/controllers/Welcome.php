@@ -91,6 +91,7 @@ class Welcome extends CI_Controller
 			//Cuando un participante con usuarios añadidos abandona el grupo
 			if (!empty($leftparticipant)) {
 				$this->newmembers->delete($leftparticipant, $group);
+				$this->delete($textId, $chatId);
 				exit;
 			}
 		}
