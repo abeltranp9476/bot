@@ -7,6 +7,8 @@ class Welcome extends CI_Controller
 {
 	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
 
+	public $listsExclusion = [];
+
 	public $usersAdd = 20;
 	public $userCounter = 0;
 	public $deleteUserAddMessage = True;
@@ -122,8 +124,8 @@ class Welcome extends CI_Controller
 
 	private function isExclusion($user)
 	{
-		$lists = [];
-		foreach ($lists as $list) {
+
+		foreach ($this->listsExclusion as $list) {
 			if ($user === $list) {
 				return True;
 			}
