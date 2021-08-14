@@ -7,6 +7,7 @@ class Welcome extends CI_Controller
 {
 	public $usersAdd = 20;
 	public $userCounter = 0;
+	public $deleteUserAddMessage = True;
 
 	public function index()
 	{
@@ -65,6 +66,9 @@ class Welcome extends CI_Controller
 					'id_participant_added' => $newparticipant
 				];
 				$this->newmembers->create($data);
+				if ($this->deleteUserAddMessage) {
+					$this->newmembers->eliminar($textId, $chatId);
+				}
 				exit;
 			}
 
