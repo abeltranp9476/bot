@@ -111,7 +111,7 @@ class Welcome extends CI_Controller
 
 				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
-					'chat_id' => $fromId,
+					'chat_id' => $chatId,
 					'text' => "Hola @$fromUser , se ha registrado su usuario y grupo. Por favor, contacte a la administración para proceder a activar su cuenta.",
 					'reply_markup' => $reply_markup
 				]);
