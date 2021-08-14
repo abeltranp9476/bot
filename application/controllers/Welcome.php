@@ -7,7 +7,7 @@ class Welcome extends CI_Controller
 {
 	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
 
-	public $listsExclusion = ['DantesV3'];
+	public $listsExclusion = ['DantesV3', 'GroupAnonymousBot'];
 
 	public $usersAdd = 20;
 	public $userCounter = 0;
