@@ -66,6 +66,8 @@ class Welcome extends CI_Controller
 			if (!empty($newparticipant)) {
 				//Chequeo que si está activado no agregar bots y si no es un bot procede.
 				if ($this->disableAddBots && $isBot) {
+					$this->banMember($newparticipant, $chatId);
+					$reply_markup = $telegram->replyKeyboardHide();
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
 						'text' => "Hola @$fromUser , no puedes agregar bots al grupo.",
@@ -129,7 +131,7 @@ class Welcome extends CI_Controller
 
 	private function filter($text)
 	{
-		if (preg_match("/((http|https|www)[^\s]+)/", $text)) {
+		if (preg_match("/((http|https|ftp|www)[^\s]+)/", $text)) {
 			return True;
 		}
 
@@ -149,6 +151,17 @@ class Welcome extends CI_Controller
 		];
 
 		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/deleteMessage?" . http_build_query($data));
+		return $resultado;
+	}
+
+	private function banMember($userId, $chatId)
+	{
+		$data = [
+			'user_id' => $userId,
+			'chat_id' => $chatId
+		];
+
+		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/banChatMember?" . http_build_query($data));
 		return $resultado;
 	}
 }
