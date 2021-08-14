@@ -34,11 +34,12 @@ class Newmembers_model extends CI_Model
 		$this->db->select('active');
 		$this->db->where('group_name', $group);
 		$query = $this->db->get('groups');
-		foreach ($query->result() as $row) {
-			if ($row->active == 1) {
-				return True;
-			}
+		$row = $query->result();
+		//foreach ($query->result() as $row) {
+		if ($row->active == 1) {
+			return True;
 		}
+		//}
 		return False;
 	}
 }
