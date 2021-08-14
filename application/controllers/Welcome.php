@@ -12,13 +12,13 @@ class Welcome extends CI_Controller
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas']
 	];
 
-	public $isActiveGroup;
-	public $isUsersAdd;
-	public $usersAdd;
+	public $isActiveGroup = true;
+	public $isUsersAdd = true;
+	public $usersAdd = 20;
 	public $userCounter = 0;
-	public $deleteUserAddMessage;
-	public $disableAddBots;
-	public $disableSpamm;
+	public $deleteUserAddMessage = true;
+	public $disableAddBots = true;
+	public $disableSpamm = true;
 
 	public function index()
 	{
@@ -46,12 +46,12 @@ class Welcome extends CI_Controller
 
 		//Obteniendo configuracion y la hacemos global
 		$config = $this->newmembers->getConfig($group);
-		$this->isActiveGroup = (int)$config->active;
-		$this->isUsersAdd = (int)$config->is_users_add;
-		$this->userAdd = (int)$config->users_add;
-		$this->deleteUserAddMessage = (int)$config->is_delete_User_Add_Message;
-		$this->disableAddBots = (int)$config->is_disable_Add_Bots;
-		$this->disableSpamm = (int)$config->is_disable_Spamm;
+		$this->isActiveGroup = $config->active;
+		$this->isUsersAdd = $config->is_users_add;
+		$this->userAdd = $config->users_add;
+		$this->deleteUserAddMessage = $config->is_delete_User_Add_Message;
+		$this->disableAddBots = $config->is_disable_Add_Bots;
+		$this->disableSpamm = $config->is_disable_Spamm;
 
 		if ($this->isActiveGroup && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
