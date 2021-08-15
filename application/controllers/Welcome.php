@@ -119,10 +119,9 @@ class Welcome extends CI_Controller
 				}
 
 				$keyboard = [
-					['7', '8', '9'],
+					['Registro:/register', '8', '9'],
 					['4', '5', '6'],
-					['1', '2', '3'],
-					['0']
+					['1', '2', '3']
 				];
 
 				$reply_markup = $telegram->replyKeyboardMarkup([
