@@ -208,7 +208,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setspam') {
-				if ($this->groups->getUserId($group) == $fromId) {
+				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'is_disable_Spamm' => $text
 					];
@@ -311,7 +311,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setuseraddmessage') {
-				if ($this->groups->getUserId($group) == $fromId) {
+				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'is_delete_User_Add_Message' => $text
 					];
@@ -364,7 +364,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setuseradd') {
-				if ($this->groups->getUserId($group) == $fromId) {
+				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'users_add' => $text
 					];
@@ -408,7 +408,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setisuseradd') {
-				if ($this->groups->getUserId($group) == $fromId) {
+				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'is_users_add' => $text
 					];
