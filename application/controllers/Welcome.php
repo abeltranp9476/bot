@@ -119,35 +119,21 @@ class Welcome extends CI_Controller
 			}
 
 			if (substr($text, 0, 9) == '/register') {
-				if ($this->tSession->getCommand($fromId) == '') {
-					$data = [
-						'command' => '/register'
-					];
-					$this->tSession->update($fromId, $data);
 
-					$reply_markup = $telegram->replyKeyboardHide();
+				$data = [
+					'command' => '/register'
+				];
+				$this->tSession->update($fromId, $data);
 
-					$telegram->sendMessage([
-						'chat_id' => $chatId,
-						'text' => "Introduzcda el nombre de su grupo:",
-						'reply_markup' => $reply_markup
-					]);
+				$reply_markup = $telegram->replyKeyboardHide();
 
-					exit;
-				} else {
-					$data = [
-						'group_name' => $text,
-						'user' => $fromId,
-						'active' => 0,
-						'is_users_add' => 1,
-						'users_add' => 20,
-						'is_delete_User_Add_Message' => 1,
-						'is_disable_Add_Bots' => 1,
-						'is_disable_Spamm' => 1
-					];
-					$this->groups->create($data);
-					exit;
-				}
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Introduzcda el nombre de su grupo:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
 			}
 		}
 	}
