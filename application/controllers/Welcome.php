@@ -356,7 +356,7 @@ class Welcome extends CI_Controller
 			if (substr($text, 0, 11) == '/setusersdd') {
 
 				$data = [
-					'command' => '/setuseradd'
+					'command' => '/setusersdd'
 				];
 				$this->tSession->update($fromId, $data);
 
@@ -371,7 +371,7 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setuserdd') {
+			if ($this->tSession->getCommand($fromId) == '/setusersdd') {
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'users_add' => $text
