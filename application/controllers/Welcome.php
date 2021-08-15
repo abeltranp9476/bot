@@ -164,7 +164,8 @@ class Welcome extends CI_Controller
 						'users_add' => 20,
 						'is_delete_User_Add_Message' => 1,
 						'is_disable_Add_Bots' => 1,
-						'is_disable_Spamm' => 1
+						'is_disable_Spamm' => 1,
+						'message_user_add' => ''
 					];
 					$this->groups->create($data);
 
