@@ -191,10 +191,10 @@ class Welcome extends CI_Controller
 			}
 
 			/* Comando: /setSpam */
-			if (substr($text, 0, 8) == '/setSpam') {
+			if (substr($text, 0, 8) == '/setspam') {
 
 				$data = [
-					'command' => '/setSpam'
+					'command' => '/setspam'
 				];
 				$this->tSession->update($fromId, $data);
 
@@ -209,7 +209,7 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setSpam') {
+			if ($this->tSession->getCommand($fromId) == '/setspam') {
 				if ($this->tSession->getUserId($group) == $fromId) {
 					$data = [
 						'is_disable_Spamm' => $text
@@ -242,10 +242,10 @@ class Welcome extends CI_Controller
 			}
 
 			/* Comando: /setBots */
-			if (substr($text, 0, 8) == '/setBots') {
+			if (substr($text, 0, 8) == '/setbots') {
 
 				$data = [
-					'command' => '/setBots'
+					'command' => '/setbots'
 				];
 				$this->tSession->update($fromId, $data);
 
@@ -260,11 +260,13 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setBots') {
-				$data = [
-					'is_disable_Add_Bots' => $text
-				];
-				$this->groups->update($this->tSession->getGroup($fromId), $data);
+			if ($this->tSession->getCommand($fromId) == '/setbots') {
+				if ($this->tSession->getUserId($group) == $fromId) {
+					$data = [
+						'is_disable_Add_Bots' => $text
+					];
+					$this->groups->update($this->tSession->getGroup($fromId), $data);
+				}
 
 				$data1 = [
 					'command' => ''
@@ -292,10 +294,10 @@ class Welcome extends CI_Controller
 
 
 			/* Comando: /setUserAddMessage */
-			if (substr($text, 0, 18) == '/setUserAddMessage') {
+			if (substr($text, 0, 18) == '/setuseraddmessage') {
 
 				$data = [
-					'command' => '/setUserAddMessage'
+					'command' => '/setuseraddmessage'
 				];
 				$this->tSession->update($fromId, $data);
 
@@ -310,11 +312,13 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setUserAddMessage') {
-				$data = [
-					'is_delete_User_Add_Message' => $text
-				];
-				$this->groups->update($this->tSession->getGroup($fromId), $data);
+			if ($this->tSession->getCommand($fromId) == '/setuseraddmessage') {
+				if ($this->tSession->getUserId($group) == $fromId) {
+					$data = [
+						'is_delete_User_Add_Message' => $text
+					];
+					$this->groups->update($this->tSession->getGroup($fromId), $data);
+				}
 
 				$data1 = [
 					'command' => ''
@@ -343,10 +347,10 @@ class Welcome extends CI_Controller
 
 
 			/* Comando: /setUserAdd */
-			if (substr($text, 0, 11) == '/setUserAdd') {
+			if (substr($text, 0, 11) == '/setuseradd') {
 
 				$data = [
-					'command' => '/setUserAdd'
+					'command' => '/setuseradd'
 				];
 				$this->tSession->update($fromId, $data);
 
@@ -361,11 +365,13 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setUserAdd') {
-				$data = [
-					'users_add' => $text
-				];
-				$this->groups->update($this->tSession->getGroup($fromId), $data);
+			if ($this->tSession->getCommand($fromId) == '/setuseradd') {
+				if ($this->tSession->getUserId($group) == $fromId) {
+					$data = [
+						'users_add' => $text
+					];
+					$this->groups->update($this->tSession->getGroup($fromId), $data);
+				}
 
 				$data1 = [
 					'command' => ''
@@ -385,10 +391,10 @@ class Welcome extends CI_Controller
 			}
 
 			/* Comando: /setIsUserAdd */
-			if (substr($text, 0, 13) == '/setIsUserAdd') {
+			if (substr($text, 0, 13) == '/setisuseradd') {
 
 				$data = [
-					'command' => '/setIsUserAdd'
+					'command' => '/setisuseradd'
 				];
 				$this->tSession->update($fromId, $data);
 
@@ -403,11 +409,13 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setIsUserAdd') {
-				$data = [
-					'is_users_add' => $text
-				];
-				$this->groups->update($this->tSession->getGroup($fromId), $data);
+			if ($this->tSession->getCommand($fromId) == '/setisuseradd') {
+				if ($this->tSession->getUserId($group) == $fromId) {
+					$data = [
+						'is_users_add' => $text
+					];
+					$this->groups->update($this->tSession->getGroup($fromId), $data);
+				}
 
 				$data1 = [
 					'command' => ''
