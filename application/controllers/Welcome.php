@@ -24,8 +24,8 @@ class Welcome extends CI_Controller
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
-		//$this->load->model('telegramsession_model', 'tSession');
-		//$this->load->model('groups_model', 'groups');
+		$this->load->model('telegramsession_model', 'tSession');
+		$this->load->model('groups_model', 'groups');
 
 		$telegram = new Api($this->token);
 		$json = file_get_contents("php://input");
@@ -103,6 +103,66 @@ class Welcome extends CI_Controller
 				if ($config->is_delete_User_Add_Message) {
 					$this->delete($textId, $chatId);
 				}
+				exit;
+			}
+		} elseif ($type == 'private') {
+			//Aquí van los comandos del bot
+
+			if (substr($text, 0, 6) == '/start') {
+				if ($this->tSession->checkUser($fromId) == 0) {
+					$data = [
+						'user_id' => $fromId,
+						'command' => ''
+					];
+					$this->tSession->create($data);
+				}
+			}
+
+			if (substr($text, 0, 9) == '/register') {
+
+				$data = [
+					'command' => '/register'
+				];
+				$this->tSession->update($fromId, $data);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Introduzca el nombre de su grupo:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			if ($this->tSession->getCommand($fromId) == '/register') {
+				$data = [
+					'group_name' => $text,
+					'user' => $fromId,
+					'active' => 0,
+					'is_users_add' => 1,
+					'users_add' => 20,
+					'is_delete_User_Add_Message' => 1,
+					'is_disable_Add_Bots' => 1,
+					'is_disable_Spamm' => 1
+				];
+				$this->groups->create($data);
+
+				$data1 = [
+					'command' => ''
+				];
+
+				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "¡Grupo $text registrado correctamente! Ahora póngase en contacto con nosotros para activarle el servicio.",
+					'reply_markup' => $reply_markup
+				]);
+
 				exit;
 			}
 		}
