@@ -382,7 +382,7 @@ class Welcome extends CI_Controller
 
 			if ($this->tSession->getCommand($fromId) == '/setIsUserAdd') {
 				$data = [
-					'is_delete_User_Add_Message' => $text
+					'is_users_add' => $text
 				];
 				$this->groups->update($this->tSession->getGroup($fromId), $data);
 
