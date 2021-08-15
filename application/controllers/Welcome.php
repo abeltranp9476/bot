@@ -24,8 +24,8 @@ class Welcome extends CI_Controller
 	public function recive()
 	{
 		$this->load->model('newmembers_model', 'newmembers');
-		$this->load->model('telegramsession_model', 'tSession');
-		$this->load->model('groups_model', 'groups');
+		//$this->load->model('telegramsession_model', 'tSession');
+		//$this->load->model('groups_model', 'groups');
 
 		$telegram = new Api($this->token);
 		$json = file_get_contents("php://input");
