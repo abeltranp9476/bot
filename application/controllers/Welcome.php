@@ -12,13 +12,8 @@ class Welcome extends CI_Controller
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas']
 	];
 
-	public $isActiveGroup = true;
-	public $isUsersAdd = true;
-	public $usersAdd = 20;
+
 	public $userCounter = 0;
-	public $deleteUserAddMessage = true;
-	public $disableAddBots = true;
-	public $disableSpamm = true;
 
 	public function index()
 	{
@@ -117,7 +112,8 @@ class Welcome extends CI_Controller
 	{
 		$this->load->model('newmembers_model', 'newmembers');
 		$this->userCounter = $this->newmembers->countAll($group, $userId);
-		if ($this->userCounter >= $this->usersAdd) {
+		$config = $this->newmembers->getConfig($group);
+		if ($this->userCounter >= $config->users_add) {
 			return True;
 		} else {
 			return False;
