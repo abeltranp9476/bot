@@ -50,9 +50,15 @@ class Welcome extends CI_Controller
 					$this->delete($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$total = $config->users_add - $this->userCounter;
+					$personalizado = $config->message_user_add;
+					if (!$personalizado == '') {
+						$mensaje = $config->message_user_add;
+					} else {
+						$mensaje = "Hola @$fromUser , no puedes escribir en este grupo hasta que no agregues contactos.";
+					}
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
-						'text' => "Hola @$fromUser , no puedes escribir en este grupo hasta que no agregues $total de tus contactos.",
+						'text' => "$mensaje Le faltan <b>$total</b>.",
 						'reply_markup' => $reply_markup
 					]);
 					exit;
