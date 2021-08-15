@@ -438,6 +438,50 @@ class Welcome extends CI_Controller
 
 				exit;
 			}
+
+			/* Comando: /setMessageUserAdd */
+			if (substr($text, 0, 18) == '/setmessageuseradd') {
+
+				$data = [
+					'command' => '/setmessageuseradd'
+				];
+				$this->tSession->update($fromId, $data);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Escriba su mensaje personalizado:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			if ($this->tSession->getCommand($fromId) == '/setmessageuseradd') {
+				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
+					$data = [
+						'message_user_add' => $text
+					];
+					$this->groups->update($this->tSession->getGroup($fromId), $data);
+				}
+
+				$data1 = [
+					'command' => ''
+				];
+
+				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Se ha establecido su mensaje personalizado.",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
 		}
 	}
 
