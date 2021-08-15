@@ -17,6 +17,7 @@ class Groups_model extends CI_Model
 
 	public function isExist($group)
 	{
+		$this->db->select('id');
 		$this->db->where('group_name', $group);
 		$query = $this->db->get('groups');
 		if ($query->num_rows() > 0) {
