@@ -129,7 +129,7 @@ class Welcome extends CI_Controller
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
-					'text' => "Introduzcda el nombre de su grupo:",
+					'text' => "Introduzca el nombre de su grupo:",
 					'reply_markup' => $reply_markup
 				]);
 
