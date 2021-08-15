@@ -154,6 +154,15 @@ class Welcome extends CI_Controller
 				];
 
 				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "¡Grupo registrado correctamente! Ahora póngase en contacto con nosotros para activarle el servicio.",
+					'reply_markup' => $reply_markup
+				]);
+
 				exit;
 			}
 		}
