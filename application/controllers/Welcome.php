@@ -217,6 +217,198 @@ class Welcome extends CI_Controller
 
 				exit;
 			}
+
+			/* Comando: /setBots */
+			if (substr($text, 0, 8) == '/setBots') {
+
+				$data = [
+					'command' => '/setBots'
+				];
+				$this->tSession->update($fromId, $data);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Seleccione la configuración para esta opción:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			if ($this->tSession->getCommand($fromId) == '/setBots') {
+				$data = [
+					'is_disable_Add_Bots' => $text
+				];
+				$this->groups->update($this->tSession->getGroup($fromId), $data);
+
+				$data1 = [
+					'command' => ''
+				];
+
+				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+				if ($text == '0') {
+					$mensaje = 'desactivado';
+				}
+
+				if ($text == '1') {
+					$mensaje = 'activado';
+				}
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Se ha $mensaje rechazar bots añadidos por los usuarios.",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+
+			/* Comando: /setUserAddMessage */
+			if (substr($text, 0, 18) == '/setUserAddMessage') {
+
+				$data = [
+					'command' => '/setUserAddMessage'
+				];
+				$this->tSession->update($fromId, $data);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Seleccione la configuración para esta opción:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			if ($this->tSession->getCommand($fromId) == '/setUserAddMessage') {
+				$data = [
+					'is_delete_User_Add_Message' => $text
+				];
+				$this->groups->update($this->tSession->getGroup($fromId), $data);
+
+				$data1 = [
+					'command' => ''
+				];
+
+				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+				if ($text == '0') {
+					$mensaje = 'desactivado';
+				}
+
+				if ($text == '1') {
+					$mensaje = 'activado';
+				}
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Se ha $mensaje eliminar mensajes de usuarios agregados y eliminados.",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+
+
+			/* Comando: /setUserAdd */
+			if (substr($text, 0, 11) == '/setUserAdd') {
+
+				$data = [
+					'command' => '/setUserAdd'
+				];
+				$this->tSession->update($fromId, $data);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Escriba un número entre 1 y 100:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			if ($this->tSession->getCommand($fromId) == '/setUserAdd') {
+				$data = [
+					'user_add' => $text
+				];
+				$this->groups->update($this->tSession->getGroup($fromId), $data);
+
+				$data1 = [
+					'command' => ''
+				];
+
+				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Se ha configurado la cantidad de usuarios a añadir en: $text",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			/* Comando: /setIsUserAdd */
+			if (substr($text, 0, 13) == '/setIsUserAdd') {
+
+				$data = [
+					'command' => '/setIsUserAdd'
+				];
+				$this->tSession->update($fromId, $data);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Seleccione la configuración para esta opción:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			if ($this->tSession->getCommand($fromId) == '/setIsUserAdd') {
+				$data = [
+					'is_delete_User_Add_Message' => $text
+				];
+				$this->groups->update($this->tSession->getGroup($fromId), $data);
+
+				$data1 = [
+					'command' => ''
+				];
+
+				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+				if ($text == '0') {
+					$mensaje = 'desactivado';
+				}
+
+				if ($text == '1') {
+					$mensaje = 'activado';
+				}
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Se ha $mensaje añadir miembros al grupo para poder escribir.",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
 		}
 	}
 
