@@ -108,6 +108,7 @@ class Welcome extends CI_Controller
 		} elseif ($type == 'private') {
 			//Aquí van los comandos del bot
 
+			/* Comando: /start */
 			if (substr($text, 0, 6) == '/start') {
 				if ($this->tSession->checkUser($fromId) == 0) {
 					$data = [
@@ -118,6 +119,7 @@ class Welcome extends CI_Controller
 				}
 			}
 
+			/* Comando: /register */
 			if (substr($text, 0, 9) == '/register') {
 
 				$data = [
@@ -160,6 +162,55 @@ class Welcome extends CI_Controller
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
 					'text' => "¡Grupo $text registrado correctamente! Ahora póngase en contacto con nosotros para activarle el servicio.",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			/* Comando: /setSpam */
+			if (substr($text, 0, 8) == '/setSpam') {
+
+				$data = [
+					'command' => '/setSpam'
+				];
+				$this->tSession->update($fromId, $data);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Seleccione la configuración para esta opción:",
+					'reply_markup' => $reply_markup
+				]);
+
+				exit;
+			}
+
+			if ($this->tSession->getCommand($fromId) == '/setSpam') {
+				$data = [
+					'is_disable_Spamm' => $text
+				];
+				$this->groups->update($group, $data);
+
+				$data1 = [
+					'command' => ''
+				];
+
+				$this->tSession->update($fromId, $data1);
+
+				$reply_markup = $telegram->replyKeyboardHide();
+				if ($text == '0') {
+					$mensaje = 'desactivado';
+				}
+
+				if ($text == '1') {
+					$mensaje = 'activado';
+				}
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Se ha $mensaje la opción de protección AntiSpam.",
 					'reply_markup' => $reply_markup
 				]);
 
