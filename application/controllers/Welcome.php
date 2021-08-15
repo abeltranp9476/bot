@@ -165,7 +165,7 @@ class Welcome extends CI_Controller
 
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
-						'text' => "¡Grupo $text registrado correctamente! Ahora póngase en contacto con nosotros para activarle el servicio.",
+						'text' => "¡Grupo $text registrado correctamente! Agrege nuestro Bot a su grupo y hágalo Administrador. Luego póngase en contacto con nosotros para activarle el servicio.",
 						'reply_markup' => $reply_markup
 					]);
 					exit;
