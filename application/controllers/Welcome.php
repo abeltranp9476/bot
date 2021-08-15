@@ -168,7 +168,6 @@ class Welcome extends CI_Controller
 						'text' => "¡Grupo $text registrado correctamente! Agrege nuestro Bot a su grupo y hágalo Administrador. Luego póngase en contacto con nosotros para activarle el servicio.",
 						'reply_markup' => $reply_markup
 					]);
-					exit;
 				} else {
 					$reply_markup = $telegram->replyKeyboardHide();
 
@@ -177,7 +176,6 @@ class Welcome extends CI_Controller
 						'text' => "El grupo $text ya fue registrado por otro cliente. Por favor, ejecute nuevamente el comando: /register e intente con otro grupo.",
 						'reply_markup' => $reply_markup
 					]);
-					exit;
 				}
 
 				$data1 = [
