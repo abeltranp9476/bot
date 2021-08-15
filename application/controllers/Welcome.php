@@ -259,7 +259,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setbots') {
-				if ($this->groups->getUserId($group) == $fromId) {
+				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'is_disable_Add_Bots' => $text
 					];
