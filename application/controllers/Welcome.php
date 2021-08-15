@@ -118,21 +118,12 @@ class Welcome extends CI_Controller
 					$this->tSession->create($data);
 				}
 
-				$keyboard = [
-					['Registro:/register', '8', '9'],
-					['4', '5', '6'],
-					['1', '2', '3']
-				];
 
-				$reply_markup = $telegram->replyKeyboardMarkup([
-					'keyboard' => $keyboard,
-					'resize_keyboard' => true,
-					'one_time_keyboard' => true
-				]);
+				$reply_markup = $telegram->replyKeyboardHide();
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
-					'text' => "Estas son las opciones:",
+					'text' => "!mi«Botón 1» – «enlace», «Botón 2» – «enlace 2»",
 					'reply_markup' => $reply_markup
 				]);
 			}
