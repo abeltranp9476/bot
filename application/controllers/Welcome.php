@@ -126,11 +126,11 @@ class Welcome extends CI_Controller
 				}
 
 
-				$reply_markup = $telegram->replyKeyboardMarkup([['go, /status']]);
+				$reply_markup = $telegram->replyKeyboardHide();
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
-					'text' => "",
+					'text' => "Por favor, use /register para añadir su grupo a nuestro sistema.",
 					'reply_markup' => $reply_markup
 				]);
 			}
