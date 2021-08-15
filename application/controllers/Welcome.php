@@ -148,17 +148,19 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/register') {
-				$data = [
-					'group_name' => $text,
-					'user' => $fromId,
-					'active' => 0,
-					'is_users_add' => 1,
-					'users_add' => 20,
-					'is_delete_User_Add_Message' => 1,
-					'is_disable_Add_Bots' => 1,
-					'is_disable_Spamm' => 1
-				];
-				$this->groups->create($data);
+				if (!$this->tSession->isExist($text)) {
+					$data = [
+						'group_name' => $text,
+						'user' => $fromId,
+						'active' => 0,
+						'is_users_add' => 1,
+						'users_add' => 20,
+						'is_delete_User_Add_Message' => 1,
+						'is_disable_Add_Bots' => 1,
+						'is_disable_Spamm' => 1
+					];
+					$this->groups->create($data);
+				}
 
 				$data1 = [
 					'command' => '',
