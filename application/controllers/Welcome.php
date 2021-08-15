@@ -292,7 +292,7 @@ class Welcome extends CI_Controller
 
 
 			/* Comando: /setUserAddMessage */
-			if (substr($text, 0, 18) == '/setusersaddmessage') {
+			if (substr($text, 0, 19) == '/setusersaddmessage') {
 
 				$data = [
 					'command' => '/setusersaddmessage'
