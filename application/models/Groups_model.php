@@ -25,4 +25,12 @@ class Groups_model extends CI_Model
 		}
 		return False;
 	}
+
+	public function getUserId($group)
+	{
+		$this->db->select('user');
+		$this->db->where('group_name', $group);
+		$query = $this->db->get('groups');
+		return $query->rows();
+	}
 }
