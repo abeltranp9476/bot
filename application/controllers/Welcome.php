@@ -353,7 +353,7 @@ class Welcome extends CI_Controller
 
 
 			/* Comando: /setUserAdd */
-			if (substr($text, 0, 11) == '/setuserdd') {
+			if (substr($text, 0, 10) == '/setuserdd') {
 
 				$data = [
 					'command' => '/setuseradd'
