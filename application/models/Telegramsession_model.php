@@ -31,4 +31,13 @@ class Telegramsession_model extends CI_Model
 		$row =  $query->row();
 		return $row->command;
 	}
+
+	public function getGroup($userId)
+	{
+		$this->db->select('group_name');
+		$this->db->where('user_id', $userId);
+		$query = $this->db->get('telegram_session');
+		$row =  $query->row();
+		return $row->group_name;
+	}
 }
