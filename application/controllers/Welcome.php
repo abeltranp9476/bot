@@ -340,7 +340,7 @@ class Welcome extends CI_Controller
 
 			if ($this->tSession->getCommand($fromId) == '/setUserAdd') {
 				$data = [
-					'user_add' => $text
+					'users_add' => $text
 				];
 				$this->groups->update($this->tSession->getGroup($fromId), $data);
 
