@@ -148,7 +148,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/register') {
-				if ($this->tSession->isExist($text)) {
+				if (!$this->groups->isExist($text)) {
 					$data = [
 						'group_name' => $text,
 						'user' => $fromId,
