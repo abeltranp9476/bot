@@ -292,10 +292,10 @@ class Welcome extends CI_Controller
 
 
 			/* Comando: /setUserAddMessage */
-			if (substr($text, 0, 18) == '/setuseraddmessage') {
+			if (substr($text, 0, 18) == '/setusersaddmessage') {
 
 				$data = [
-					'command' => '/setuseraddmessage'
+					'command' => '/setusersaddmessage'
 				];
 				$this->tSession->update($fromId, $data);
 
@@ -310,7 +310,7 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setuseraddmessage') {
+			if ($this->tSession->getCommand($fromId) == '/setusersaddmessage') {
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'is_delete_User_Add_Message' => $text
@@ -345,7 +345,7 @@ class Welcome extends CI_Controller
 
 
 			/* Comando: /setUserAdd */
-			if (substr($text, 0, 11) == '/setuseradd') {
+			if (substr($text, 0, 11) == '/setuserdd') {
 
 				$data = [
 					'command' => '/setuseradd'
@@ -363,7 +363,7 @@ class Welcome extends CI_Controller
 				exit;
 			}
 
-			if ($this->tSession->getCommand($fromId) == '/setuseradd') {
+			if ($this->tSession->getCommand($fromId) == '/setuserdd') {
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'users_add' => $text
