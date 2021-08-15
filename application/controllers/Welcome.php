@@ -117,6 +117,25 @@ class Welcome extends CI_Controller
 					];
 					$this->tSession->create($data);
 				}
+
+				$keyboard = [
+					['7', '8', '9'],
+					['4', '5', '6'],
+					['1', '2', '3'],
+					['0']
+				];
+
+				$reply_markup = $telegram->replyKeyboardMarkup([
+					'keyboard' => $keyboard,
+					'resize_keyboard' => true,
+					'one_time_keyboard' => true
+				]);
+
+				$telegram->sendMessage([
+					'chat_id' => $chatId,
+					'text' => "Estas son las opciones:",
+					'reply_markup' => $reply_markup
+				]);
 			}
 
 			/* Comando: /register */
