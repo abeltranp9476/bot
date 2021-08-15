@@ -160,6 +160,24 @@ class Welcome extends CI_Controller
 						'is_disable_Spamm' => 1
 					];
 					$this->groups->create($data);
+
+					$reply_markup = $telegram->replyKeyboardHide();
+
+					$telegram->sendMessage([
+						'chat_id' => $chatId,
+						'text' => "¡Grupo $text registrado correctamente! Ahora póngase en contacto con nosotros para activarle el servicio.",
+						'reply_markup' => $reply_markup
+					]);
+					exit;
+				} else {
+					$reply_markup = $telegram->replyKeyboardHide();
+
+					$telegram->sendMessage([
+						'chat_id' => $chatId,
+						'text' => "El grupo $text ya fue registrado por otro cliente. Por favor, ejecute nuevamente el comando: /register e intente con otro grupo.",
+						'reply_markup' => $reply_markup
+					]);
+					exit;
 				}
 
 				$data1 = [
@@ -168,14 +186,6 @@ class Welcome extends CI_Controller
 				];
 
 				$this->tSession->update($fromId, $data1);
-
-				$reply_markup = $telegram->replyKeyboardHide();
-
-				$telegram->sendMessage([
-					'chat_id' => $chatId,
-					'text' => "¡Grupo $text registrado correctamente! Ahora póngase en contacto con nosotros para activarle el servicio.",
-					'reply_markup' => $reply_markup
-				]);
 
 				exit;
 			}
