@@ -58,9 +58,9 @@ class Welcome extends CI_Controller
 					}
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
-						'text' => "$mensaje Le faltan <b>$total</b>.",
+						'text' => "$mensaje Le faltan *$total*.",
 						'reply_markup' => $reply_markup,
-						'parse_mode' => 'html'
+						'parse_mode' => 'markdown'
 					]);
 					exit;
 				}
