@@ -31,9 +31,7 @@ class Groups_model extends CI_Model
 		$this->db->select('user');
 		$this->db->where('group_name', $group);
 		$query = $this->db->get('groups');
-		if ($query->num_rows() > 0) {
-			return true;
-		}
-		return false;
+		$row = $query->row();
+		return $row->user;
 	}
 }
