@@ -119,7 +119,7 @@ class Welcome extends CI_Controller
 				}
 
 
-				$reply_markup = $telegram->replyKeyboardMarkup([['go , /status']]);
+				$reply_markup = $telegram->replyKeyboardMarkup([['go, /status']]);
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
