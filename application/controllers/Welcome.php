@@ -575,7 +575,7 @@ class Welcome extends CI_Controller
 		$reply_markup = $telegram->replyKeyboardHide();
 		$telegram->sendMessage([
 			'chat_id' => $chatId,
-			'text' => "Por favor, escriba un número entre $min y $max.",
+			'text' => "¡Por favor, escriba un número entre $min y $max! Intente nuevamente...",
 			'reply_markup' => $reply_markup
 		]);
 		exit;
