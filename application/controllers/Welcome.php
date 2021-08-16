@@ -625,7 +625,15 @@ class Welcome extends CI_Controller
 			}
 		}
 		$telegram = new Api($this->token);
-		$reply_markup = $telegram->replyKeyboardHide();
+		$keyboard = [
+			['active', 'inactive']
+		];
+
+		$reply_markup = $telegram->replyKeyboardMarkup([
+			'keyboard' => $keyboard,
+			'resize_keyboard' => true,
+			'one_time_keyboard' => true
+		]);
 		$telegram->sendMessage([
 			'chat_id' => $chatId,
 			'text' => "¡No es válido es valor que desea aplicar! Intente nuevamente...",
