@@ -160,9 +160,9 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/register') {
-				if (!$this->groups->isExist($text)) {
+				if (!$this->groups->isExist($this->cleanGroupName($text))) {
 					$data = [
-						'group_name' => $text,
+						'group_name' => $this->cleanGroupName($text),
 						'user' => $fromId,
 						'active' => 0,
 						'is_users_add' => 1,
@@ -666,5 +666,11 @@ class Welcome extends CI_Controller
 		$text = preg_replace("/%remaning%/", $total, $text);
 		$text = preg_replace("/%total%/", $this->useradd, $text);
 		return $text;
+	}
+
+	private function cleanGroupName($group)
+	{
+		$group = preg_replace("/@/", '', $group);
+		return trim($group);
 	}
 }
