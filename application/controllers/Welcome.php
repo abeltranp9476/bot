@@ -310,6 +310,7 @@ class Welcome extends CI_Controller
 					$mensaje = 'activado';
 				}
 
+				$reply_markup = $telegram->replyKeyboardHide();
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
 					'text' => "Se ha $mensaje rechazar bots añadidos por los usuarios.",
