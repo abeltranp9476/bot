@@ -231,11 +231,11 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data1);
 
 				$reply_markup = $telegram->replyKeyboardHide();
-				if ($text == '0') {
+				if ($text == 'inactive') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == '1') {
+				if ($text == 'active') {
 					$mensaje = 'activado';
 				}
 
@@ -585,7 +585,7 @@ class Welcome extends CI_Controller
 	private function isValid($option, $chatId)
 	{
 		$optionList = ['active', 'inactive'];
-		$result = false;
+
 		foreach ($optionList as $options) {
 			if ($option === $options) {
 				return true;
