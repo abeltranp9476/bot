@@ -372,7 +372,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setusersdd') {
-				$this->isRange($text, 1, 100);
+				$this->isRange($text, 1, 100, $chatId);
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'users_add' => $text
@@ -566,7 +566,7 @@ class Welcome extends CI_Controller
 		return $resultado;
 	}
 
-	private function isRange($number, $min, $max)
+	private function isRange($number, $min, $max, $chatId)
 	{
 		if ($number >= $min and $number <= $max) {
 			return true;
@@ -581,7 +581,7 @@ class Welcome extends CI_Controller
 		exit;
 	}
 
-	private function isValid($option)
+	private function isValid($option, $chatId)
 	{
 		$optionList = ['active', 'inactive'];
 		$result = false;
