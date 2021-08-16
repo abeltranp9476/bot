@@ -508,9 +508,9 @@ class Welcome extends CI_Controller
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
-					'text' => "Escriba su mensaje personalizado:",
+					'text' => "Escriba su mensaje personalizado:  *Comodines:  *%user% - Nombre de usuario  %total% - # de contactos a añadir  %counter% - # de contactos añadidos  %reminder% - # de contactos que faltan",
 					'reply_markup' => $reply_markup,
-					'parse_mode' => 'HTML'
+					'parse_mode' => 'markdown'
 				]);
 
 				exit;
