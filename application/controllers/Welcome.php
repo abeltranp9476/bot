@@ -510,7 +510,7 @@ class Welcome extends CI_Controller
 			if ($this->tSession->getCommand($fromId) == '/setmessageuseradd') {
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 
-					if ($text === '/ignore') {
+					if ($text === 'ignore') {
 						$reply_markup = $telegram->replyKeyboardHide();
 						$telegram->sendMessage([
 							'chat_id' => $chatId,
@@ -520,7 +520,7 @@ class Welcome extends CI_Controller
 						exit;
 					}
 
-					if ($text === '/empty') {
+					if ($text === 'empty') {
 						$reply_markup = $telegram->replyKeyboardHide();
 
 						$telegram->sendMessage([
