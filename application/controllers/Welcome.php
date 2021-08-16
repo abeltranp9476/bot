@@ -642,7 +642,7 @@ class Welcome extends CI_Controller
 		]);
 		$telegram->sendMessage([
 			'chat_id' => $chatId,
-			'text' => "¡No es válido es valor que desea aplicar! Intente nuevamente...",
+			'text' => "¡No es válido el valor que desea aplicar! Intente nuevamente...",
 			'reply_markup' => $reply_markup
 		]);
 		exit;
