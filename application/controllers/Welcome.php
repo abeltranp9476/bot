@@ -511,7 +511,6 @@ class Welcome extends CI_Controller
 					'text' => "Escriba su mensaje personalizado:",
 					'reply_markup' => $reply_markup
 				]);
-
 				exit;
 			}
 
