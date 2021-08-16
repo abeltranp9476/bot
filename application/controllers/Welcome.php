@@ -509,6 +509,34 @@ class Welcome extends CI_Controller
 
 			if ($this->tSession->getCommand($fromId) == '/setmessageuseradd') {
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
+
+					if ($text === '/ignore') {
+						$reply_markup = $telegram->replyKeyboardHide();
+						$telegram->sendMessage([
+							'chat_id' => $chatId,
+							'text' => "Se ha cancelado el comando.",
+							'reply_markup' => $reply_markup
+						]);
+						exit;
+					}
+
+					if ($text === '/empty') {
+						$reply_markup = $telegram->replyKeyboardHide();
+
+						$telegram->sendMessage([
+							'chat_id' => $chatId,
+							'text' => "Se ha eliminado su mensaje personalizado.",
+							'reply_markup' => $reply_markup
+						]);
+
+						$data = [
+							'message_user_add' => ''
+						];
+						$this->groups->update($this->tSession->getGroup($fromId), $data);
+
+						exit;
+					}
+
 					$data = [
 						'message_user_add' => $text
 					];
