@@ -57,7 +57,7 @@ class Welcome extends CI_Controller
 					$total = $config->users_add - $this->userCounter;
 					$personalizado = $config->message_user_add;
 					if (!$personalizado == '') {
-						$mensaje = $config->message_user_add;
+						$mensaje = $this->parseText($config->message_user_add);
 					} else {
 						$mensaje = "Hola @$fromUser, no puedes escribir en este grupo hasta que no agregues contactos. Faltan $total.";
 					}
