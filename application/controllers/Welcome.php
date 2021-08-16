@@ -587,18 +587,16 @@ class Welcome extends CI_Controller
 		$result = false;
 		foreach ($optionList as $options) {
 			if ($option === $options) {
-				$result = true;
+				return true;
 			}
 		}
-		if (!$result) {
-			$telegram = new Api($this->token);
-			$reply_markup = $telegram->replyKeyboardHide();
-			$telegram->sendMessage([
-				'chat_id' => $chatId,
-				'text' => "¡No es válido es valor que desea aplicar! Intente nuevamente...",
-				'reply_markup' => $reply_markup
-			]);
-			exit;
-		}
+		$telegram = new Api($this->token);
+		$reply_markup = $telegram->replyKeyboardHide();
+		$telegram->sendMessage([
+			'chat_id' => $chatId,
+			'text' => "¡No es válido es valor que desea aplicar! Intente nuevamente...",
+			'reply_markup' => $reply_markup
+		]);
+		exit;
 	}
 }
