@@ -372,6 +372,7 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setusersdd') {
+				$this->isRange($text, 1, 100);
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
 						'users_add' => $text
@@ -563,5 +564,41 @@ class Welcome extends CI_Controller
 
 		$resultado = file_get_contents("https://api.telegram.org/bot$this->token/banChatMember?" . http_build_query($data));
 		return $resultado;
+	}
+
+	private function isRange($number, $min, $max)
+	{
+		if ($number >= $min and $number <= $max) {
+			return true;
+		}
+		$telegram = new Api($this->token);
+		$reply_markup = $telegram->replyKeyboardHide();
+		$telegram->sendMessage([
+			'chat_id' => $chatId,
+			'text' => "Por favor, escriba un número entre $min y $max.",
+			'reply_markup' => $reply_markup
+		]);
+		exit;
+	}
+
+	private function isValid($option)
+	{
+		$optionList = ['active', 'inactive'];
+		$result = false;
+		foreach ($optionList as $options) {
+			if ($option === $options) {
+				$result = true;
+			}
+		}
+		if (!$result) {
+			$telegram = new Api($this->token);
+			$reply_markup = $telegram->replyKeyboardHide();
+			$telegram->sendMessage([
+				'chat_id' => $chatId,
+				'text' => "¡No es válido es valor que desea aplicar! Intente nuevamente...",
+				'reply_markup' => $reply_markup
+			]);
+			exit;
+		}
 	}
 }
