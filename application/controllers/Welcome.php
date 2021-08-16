@@ -147,7 +147,7 @@ class Welcome extends CI_Controller
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
-					'text' => "Introduzca el nombre de su grupo:",
+					'text' => "Introduzca el nombre de su grupo (Ej: @group_name)...",
 					'reply_markup' => $reply_markup
 				]);
 
@@ -216,9 +216,10 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setspam') {
+				$this->isValid($text, $chatId);
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
-						'is_disable_Spamm' => $text
+						'is_disable_Spamm' => $this->changeValue($text)
 					];
 					$this->groups->update($this->tSession->getGroup($fromId), $data);
 				}
@@ -598,5 +599,16 @@ class Welcome extends CI_Controller
 			'reply_markup' => $reply_markup
 		]);
 		exit;
+	}
+
+	private function changeValue($option)
+	{
+		if ($option === 'active') {
+			return 1;
+		}
+
+		if ($option === 'inactive') {
+			return 0;
+		}
 	}
 }
