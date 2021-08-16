@@ -203,8 +203,17 @@ class Welcome extends CI_Controller
 					'command' => '/setspam'
 				];
 				$this->tSession->update($fromId, $data);
+				$keyboard = [
+					['active', 'inactive']
+				];
 
-				$reply_markup = $telegram->replyKeyboardHide();
+				$reply_markup = $telegram->replyKeyboardMarkup([
+					'keyboard' => $keyboard,
+					'resize_keyboard' => true,
+					'one_time_keyboard' => true
+				]);
+
+				//$reply_markup = $telegram->replyKeyboardHide();
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
