@@ -15,6 +15,7 @@ class Welcome extends CI_Controller
 
 	public $userCounter = 0;
 	public $fromUser = '';
+	public $useradd = 0;
 
 	public function index()
 	{
@@ -46,6 +47,8 @@ class Welcome extends CI_Controller
 		//Obteniendo configuracion y la hacemos global
 		$config = $this->newmembers->getConfig($group);
 
+		$this->useradd = $config->users_add;
+
 		if ($config->active && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
 				if ($config->is_users_add && !$text == '') {
@@ -56,11 +59,11 @@ class Welcome extends CI_Controller
 					if (!$personalizado == '') {
 						$mensaje = $config->message_user_add;
 					} else {
-						$mensaje = "no puedes escribir en este grupo hasta que no agregues contactos.";
+						$mensaje = "Hola @$fromUser, no puedes escribir en este grupo hasta que no agregues contactos. Faltan $total.";
 					}
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
-						'text' => "Hola @$fromUser, " . $this->parseText($mensaje) . " Le faltan *$total*.",
+						'text' => "$mensaje",
 						'reply_markup' => $reply_markup,
 						'parse_mode' => 'markdown'
 					]);
@@ -657,7 +660,11 @@ class Welcome extends CI_Controller
 
 	private function parseText($text)
 	{
+		$total = $this->useradd  - $this->userCounter;
 		$text = preg_replace("/%user%/", $this->fromUser, $text);
+		$text = preg_replace("/%counter%/", $this->userCounter, $text);
+		$text = preg_replace("/%remaning%/", $total, $text);
+		$text = preg_replace("/%total%/", $this->useradd, $text);
 		return $text;
 	}
 }
