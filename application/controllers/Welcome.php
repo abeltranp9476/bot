@@ -193,7 +193,7 @@ class Welcome extends CI_Controller
 
 				$data1 = [
 					'command' => '',
-					'group_name' => $text
+					'group_name' => $this->cleanGroupName($text)
 				];
 
 				$this->tSession->update($fromId, $data1);
