@@ -496,7 +496,15 @@ class Welcome extends CI_Controller
 				];
 				$this->tSession->update($fromId, $data);
 
-				$reply_markup = $telegram->replyKeyboardHide();
+				$keyboard = [
+					['empty', 'ignore']
+				];
+
+				$reply_markup = $telegram->replyKeyboardMarkup([
+					'keyboard' => $keyboard,
+					'resize_keyboard' => true,
+					'one_time_keyboard' => true
+				]);
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
