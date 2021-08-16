@@ -213,8 +213,6 @@ class Welcome extends CI_Controller
 					'one_time_keyboard' => true
 				]);
 
-				//$reply_markup = $telegram->replyKeyboardHide();
-
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
 					'text' => "Seleccione la configuración para esta opción:",
@@ -265,7 +263,15 @@ class Welcome extends CI_Controller
 				];
 				$this->tSession->update($fromId, $data);
 
-				$reply_markup = $telegram->replyKeyboardHide();
+				$keyboard = [
+					['active', 'inactive']
+				];
+
+				$reply_markup = $telegram->replyKeyboardMarkup([
+					'keyboard' => $keyboard,
+					'resize_keyboard' => true,
+					'one_time_keyboard' => true
+				]);
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
@@ -277,9 +283,10 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setbots') {
+				$this->isValid($text, $chatId);
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
-						'is_disable_Add_Bots' => $text
+						'is_disable_Add_Bots' => $this->changeValue($text)
 					];
 					$this->groups->update($this->tSession->getGroup($fromId), $data);
 				}
@@ -290,12 +297,11 @@ class Welcome extends CI_Controller
 
 				$this->tSession->update($fromId, $data1);
 
-				$reply_markup = $telegram->replyKeyboardHide();
-				if ($text == '0') {
+				if ($text == 'inactive') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == '1') {
+				if ($text == 'active') {
 					$mensaje = 'activado';
 				}
 
@@ -317,7 +323,15 @@ class Welcome extends CI_Controller
 				];
 				$this->tSession->update($fromId, $data);
 
-				$reply_markup = $telegram->replyKeyboardHide();
+				$keyboard = [
+					['active', 'inactive']
+				];
+
+				$reply_markup = $telegram->replyKeyboardMarkup([
+					'keyboard' => $keyboard,
+					'resize_keyboard' => true,
+					'one_time_keyboard' => true
+				]);
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
@@ -329,9 +343,10 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setusersaddmessage') {
+				$this->isValid($text, $chatId);
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
-						'is_delete_User_Add_Message' => $text
+						'is_delete_User_Add_Message' => $this->changeValue($text)
 					];
 					$this->groups->update($this->tSession->getGroup($fromId), $data);
 				}
@@ -343,11 +358,11 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data1);
 
 				$reply_markup = $telegram->replyKeyboardHide();
-				if ($text == '0') {
+				if ($text == 'inactive') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == '1') {
+				if ($text == 'active') {
 					$mensaje = 'activado';
 				}
 
@@ -415,7 +430,15 @@ class Welcome extends CI_Controller
 				];
 				$this->tSession->update($fromId, $data);
 
-				$reply_markup = $telegram->replyKeyboardHide();
+				$keyboard = [
+					['active', 'inactive']
+				];
+
+				$reply_markup = $telegram->replyKeyboardMarkup([
+					'keyboard' => $keyboard,
+					'resize_keyboard' => true,
+					'one_time_keyboard' => true
+				]);
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
@@ -427,9 +450,10 @@ class Welcome extends CI_Controller
 			}
 
 			if ($this->tSession->getCommand($fromId) == '/setisuseradd') {
+				$this->isValid($text, $chatId);
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 					$data = [
-						'is_users_add' => $text
+						'is_users_add' => $this->changeValue($text)
 					];
 					$this->groups->update($this->tSession->getGroup($fromId), $data);
 				}
@@ -441,11 +465,11 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data1);
 
 				$reply_markup = $telegram->replyKeyboardHide();
-				if ($text == '0') {
+				if ($text == 'inactive') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == '1') {
+				if ($text == 'active') {
 					$mensaje = 'activado';
 				}
 
