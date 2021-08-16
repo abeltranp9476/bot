@@ -60,7 +60,7 @@ class Welcome extends CI_Controller
 					}
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
-						'text' => "Hola @$fromUser, $this->parseText($mensaje) Le faltan *$total*.",
+						'text' => "Hola @$fromUser, " . $this->parseText($mensaje) . " Le faltan *$total*.",
 						'reply_markup' => $reply_markup,
 						'parse_mode' => 'markdown'
 					]);
@@ -658,5 +658,6 @@ class Welcome extends CI_Controller
 	private function parseText($text)
 	{
 		$text = preg_replace("/%user%/", $this->fromUser, $text);
+		return $text;
 	}
 }
