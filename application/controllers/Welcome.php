@@ -14,6 +14,7 @@ class Welcome extends CI_Controller
 
 
 	public $userCounter = 0;
+	public $fromUser = '';
 
 	public function index()
 	{
@@ -41,6 +42,7 @@ class Welcome extends CI_Controller
 		$isBot = $request->message->new_chat_participant->is_bot;
 		$leftparticipant = $request->message->left_chat_member->id;
 
+		$this->fromUser = $fromUser;
 		//Obteniendo configuracion y la hacemos global
 		$config = $this->newmembers->getConfig($group);
 
@@ -58,7 +60,7 @@ class Welcome extends CI_Controller
 					}
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
-						'text' => "Hola @$fromUser, $mensaje Le faltan *$total*.",
+						'text' => "Hola @$fromUser, $this->parseText($mensaje) Le faltan *$total*.",
 						'reply_markup' => $reply_markup,
 						'parse_mode' => 'markdown'
 					]);
@@ -651,5 +653,10 @@ class Welcome extends CI_Controller
 		if ($option === 'inactive') {
 			return 0;
 		}
+	}
+
+	private function parseText($text)
+	{
+		$text = preg_replace("/%user%/", $this->fromUser, $text);
 	}
 }
