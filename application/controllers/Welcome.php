@@ -511,7 +511,7 @@ Utilice los comodines:
 _%user%_ - nombre de usuario
 _%total%_ - Valor configurado
 _%counter%_ - Contador de usuarios
-_%reminder%_ - Cuantos faltan";
+_%reminder%_ - Cuántos faltan";
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
