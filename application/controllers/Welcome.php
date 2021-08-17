@@ -506,7 +506,7 @@ class Welcome extends CI_Controller
 					'one_time_keyboard' => true
 				]);
 
-				$message = "<b>Escriba su mensaje personalizado</b> \n\n
+				$message = "*Escriba su mensaje personalizado* \n\n
 				*Utilice los comodines de ser necesario:* \n
 				*%user%* - **nombre de usuario** \n
 				*%total%* - **Valor configurado** \n
@@ -517,7 +517,7 @@ class Welcome extends CI_Controller
 					'chat_id' => $chatId,
 					'text' => $message,
 					'reply_markup' => $reply_markup,
-					'parse_mode' => 'HTML'
+					'parse_mode' => 'markdown'
 				]);
 				exit;
 			}
