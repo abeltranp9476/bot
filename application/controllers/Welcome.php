@@ -506,8 +506,8 @@ class Welcome extends CI_Controller
 					'one_time_keyboard' => true
 				]);
 
-				$message = "*Escriba su mensaje personalizado*
-				*Utilice los comodines de ser necesario:*
+				$message = "	*Escriba su mensaje personalizado*
+				*Utilice los comodines:*
 				*%user%* - **nombre de usuario**
 				*%total%* - **Valor configurado**
 				*%counter%* - **Contador de usuarios**
