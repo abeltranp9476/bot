@@ -506,7 +506,12 @@ class Welcome extends CI_Controller
 					'one_time_keyboard' => true
 				]);
 
-				$message = "<b>Escriba su mensaje personalizado</b> \n";
+				$message = "<b>Escriba su mensaje personalizado</b> \n\n
+				*Utilice los comodines de ser necesario:* \n
+				*%user%* - **nombre de usuario** \n
+				*%total%* - **Valor configurado** \n
+				*%counter%* - **Contador de usuarios** \n
+				*%reminder%* - **Cuantos faltan**";
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
