@@ -508,10 +508,10 @@ class Welcome extends CI_Controller
 
 				$message = "*Escriba su mensaje personalizado*
 Utilice los comodines:
-_%user%_ - nombre de usuario
-_%total%_ - Valor configurado
-_%counter%_ - Contador de usuarios
-_%reminder%_ - Cuántos faltan";
+__%user%__ - nombre de usuario
+__%total%__ - Valor configurado
+__%counter%__ - Contador de usuarios
+__%reminder%__ - Cuántos faltan";
 
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
