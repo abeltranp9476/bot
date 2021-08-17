@@ -8,8 +8,8 @@ class Welcome extends CI_Controller
 	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
 
 	public $listsExclusion = [
-		['username' => 'DantesV3', 'group' => 'comprayventadecasas'],
-		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas']
+		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas'],
+		['username' => 'GroupAnonymousBot', 'group' => ''],
 	];
 
 
@@ -506,10 +506,13 @@ class Welcome extends CI_Controller
 					'one_time_keyboard' => true
 				]);
 
+				$message = "<b>Escriba su mensaje personalizado</b> \n";
+
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
-					'text' => "Escriba su mensaje personalizado:",
-					'reply_markup' => $reply_markup
+					'text' => $message,
+					'reply_markup' => $reply_markup,
+					'parse_mode' => 'HTML'
 				]);
 				exit;
 			}
