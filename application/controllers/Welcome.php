@@ -525,6 +525,7 @@ __%reminder%__ - Cuántos faltan";
 			if ($this->tSession->getCommand($fromId) == '/setmessageuseradd') {
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 
+
 					if ($text === 'Ignorar') {
 						$reply_markup = $telegram->replyKeyboardHide();
 						$telegram->sendMessage([
@@ -532,6 +533,12 @@ __%reminder%__ - Cuántos faltan";
 							'text' => "Se ha cancelado el comando.",
 							'reply_markup' => $reply_markup
 						]);
+
+						$data1 = [
+							'command' => ''
+						];
+
+						$this->tSession->update($fromId, $data1);
 						exit;
 					}
 
@@ -548,6 +555,12 @@ __%reminder%__ - Cuántos faltan";
 							'message_user_add' => ''
 						];
 						$this->groups->update($this->tSession->getGroup($fromId), $data);
+
+						$data1 = [
+							'command' => ''
+						];
+
+						$this->tSession->update($fromId, $data1);
 
 						exit;
 					}
