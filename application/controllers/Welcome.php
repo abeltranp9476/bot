@@ -209,7 +209,7 @@ class Welcome extends CI_Controller
 				];
 				$this->tSession->update($fromId, $data);
 				$keyboard = [
-					['active', 'inactive']
+					['Activar', 'Desactivar']
 				];
 
 				$reply_markup = $telegram->replyKeyboardMarkup([
@@ -243,11 +243,11 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data1);
 
 				$reply_markup = $telegram->replyKeyboardHide();
-				if ($text == 'inactive') {
+				if ($text == 'Desactivar') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == 'active') {
+				if ($text == 'Activar') {
 					$mensaje = 'activado';
 				}
 
@@ -269,7 +269,7 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data);
 
 				$keyboard = [
-					['active', 'inactive']
+					['Activar', 'Desactivar']
 				];
 
 				$reply_markup = $telegram->replyKeyboardMarkup([
@@ -302,11 +302,11 @@ class Welcome extends CI_Controller
 
 				$this->tSession->update($fromId, $data1);
 
-				if ($text == 'inactive') {
+				if ($text == 'Desactivar') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == 'active') {
+				if ($text == 'Activar') {
 					$mensaje = 'activado';
 				}
 
@@ -330,7 +330,7 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data);
 
 				$keyboard = [
-					['active', 'inactive']
+					['Activar', 'Desactivar']
 				];
 
 				$reply_markup = $telegram->replyKeyboardMarkup([
@@ -364,11 +364,11 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data1);
 
 				$reply_markup = $telegram->replyKeyboardHide();
-				if ($text == 'inactive') {
+				if ($text == 'Desactivar') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == 'active') {
+				if ($text == 'Activar') {
 					$mensaje = 'activado';
 				}
 
@@ -437,7 +437,7 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data);
 
 				$keyboard = [
-					['active', 'inactive']
+					['Activar', 'Desactivar']
 				];
 
 				$reply_markup = $telegram->replyKeyboardMarkup([
@@ -471,11 +471,11 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data1);
 
 				$reply_markup = $telegram->replyKeyboardHide();
-				if ($text == 'inactive') {
+				if ($text == 'Desactivar') {
 					$mensaje = 'desactivado';
 				}
 
-				if ($text == 'active') {
+				if ($text == 'Activar') {
 					$mensaje = 'activado';
 				}
 
@@ -497,7 +497,7 @@ class Welcome extends CI_Controller
 				$this->tSession->update($fromId, $data);
 
 				$keyboard = [
-					['empty', 'ignore']
+					['Vaciar', 'Ignorar']
 				];
 
 				$reply_markup = $telegram->replyKeyboardMarkup([
@@ -525,7 +525,7 @@ __%reminder%__ - Cuántos faltan";
 			if ($this->tSession->getCommand($fromId) == '/setmessageuseradd') {
 				if ($this->groups->getUserId($this->tSession->getGroup($fromId)) == $fromId) {
 
-					if ($text === 'ignore') {
+					if ($text === 'Ignorar') {
 						$reply_markup = $telegram->replyKeyboardHide();
 						$telegram->sendMessage([
 							'chat_id' => $chatId,
@@ -535,7 +535,7 @@ __%reminder%__ - Cuántos faltan";
 						exit;
 					}
 
-					if ($text === 'empty') {
+					if ($text === 'Vaciar') {
 						$reply_markup = $telegram->replyKeyboardHide();
 
 						$telegram->sendMessage([
@@ -666,7 +666,7 @@ __%reminder%__ - Cuántos faltan";
 
 	private function isValid($option, $chatId)
 	{
-		$optionList = ['active', 'inactive'];
+		$optionList = ['Activar', 'Desactivar'];
 
 		foreach ($optionList as $options) {
 			if ($option === $options) {
@@ -675,7 +675,7 @@ __%reminder%__ - Cuántos faltan";
 		}
 		$telegram = new Api($this->token);
 		$keyboard = [
-			['active', 'inactive']
+			['Activar', 'Desactivar']
 		];
 
 		$reply_markup = $telegram->replyKeyboardMarkup([
@@ -693,11 +693,11 @@ __%reminder%__ - Cuántos faltan";
 
 	private function changeValue($option)
 	{
-		if ($option === 'active') {
+		if ($option === 'Activar') {
 			return 1;
 		}
 
-		if ($option === 'inactive') {
+		if ($option === 'Desactivar') {
 			return 0;
 		}
 	}
