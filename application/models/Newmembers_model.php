@@ -25,6 +25,7 @@ class Newmembers_model extends CI_Model
 		$this->db->select('id');
 		$this->db->where('group_name', $group);
 		$this->db->where('from_id', $userId);
+		$this->db->where('id_participant_added !=', $userId);
 		$query = $this->db->get('newmembers');
 		return $query->num_rows();
 	}
