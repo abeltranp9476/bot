@@ -9,8 +9,7 @@ class Welcome extends CI_Controller
 
 	public $listsExclusion = [
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas'],
-		['username' => 'GroupAnonymousBot', 'group' => 'detectongrupo'],
-		['username' => 'GroupAnonymousBot', 'group' => 'revolicompraventa'],
+		['username' => 'GroupAnonymousBot', 'group' => 'detectongrupo']
 	];
 
 
@@ -22,6 +21,7 @@ class Welcome extends CI_Controller
 	{
 		echo "Bot Server";
 	}
+
 
 	public function recive()
 	{
