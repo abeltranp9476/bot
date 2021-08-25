@@ -36,7 +36,7 @@ class Welcome extends CI_Controller
 		$group = $request->message->chat->username;
 		$chatId = $request->message->chat->id;
 		$fromUser = $request->message->from->username;
-		$fromName = $request->message->from->name;
+		$fromName = $request->message->from->firstname;
 		$fromId = $request->message->from->id;
 		$type = $request->message->chat->type;
 		$text = $request->message->text;
@@ -64,7 +64,7 @@ class Welcome extends CI_Controller
 						if ($fromUser == '') {
 							$nombre = $fromName;
 						} else {
-							$nombre = $fromName . ' (@' . $fromUser . ')';
+							$nombre = '*' . $fromName . '* (@' . $fromUser . ')';
 						}
 						$mensaje = "Hola $nombre, no puedes escribir en este grupo hasta que no agregues contactos. Faltan *$total*.";
 					}
