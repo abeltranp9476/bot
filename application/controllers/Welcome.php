@@ -35,7 +35,7 @@ class Welcome extends CI_Controller
 		$request = json_decode($json, $assoc = false);
 		$group = $request->message->chat->username;
 		$chatId = $request->message->chat->id;
-		$fromUser = $request->message->from->username;
+		$fromUser = $request->message->from->first_name;
 		$fromName = $request->message->from->name;
 		$fromId = $request->message->from->id;
 		$type = $request->message->chat->type;
