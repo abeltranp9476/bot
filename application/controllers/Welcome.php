@@ -36,7 +36,7 @@ class Welcome extends CI_Controller
 		$group = $request->message->chat->username;
 		$chatId = $request->message->chat->id;
 		$fromUser = $request->message->from->username;
-		$fromName = $request->message->from->firstname;
+		$fromName = $request->message->from->name;
 		$fromId = $request->message->from->id;
 		$type = $request->message->chat->type;
 		$text = $request->message->text;
