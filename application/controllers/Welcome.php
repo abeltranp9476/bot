@@ -16,6 +16,7 @@ class Welcome extends CI_Controller
 
 	public $userCounter = 0;
 	public $fromUser = '';
+	public $fromName = '';
 	public $useradd = 0;
 
 	public function index()
@@ -46,6 +47,7 @@ class Welcome extends CI_Controller
 		$leftparticipant = $request->message->left_chat_member->id;
 
 		$this->fromUser = $fromUser;
+		$this->fromName = $fromName;
 		//Obteniendo configuracion y la hacemos global
 		$config = $this->newmembers->getConfig($group);
 
@@ -727,7 +729,14 @@ __%reminder%__ - Cuántos faltan";
 	private function parseText($text)
 	{
 		$total = $this->useradd  - $this->userCounter;
-		$text = preg_replace("/%user%/", $this->fromUser, $text);
+		if ($this->fromUser == '') {
+			$nombre = "*$this->fromName*";
+		} elseif (!$this->fromName == '') {
+			$nombre = '*' . $this->fromName . '* (@' . $this->fromUser . ')';
+		} else {
+			$nombre = "@$this->fromUser";
+		}
+		$text = preg_replace("/%user%/", $nombre, $text);
 		$text = preg_replace("/%counter%/", $this->userCounter, $text);
 		$text = preg_replace("/%remaning%/", $total, $text);
 		$text = preg_replace("/%total%/", $this->useradd, $text);
