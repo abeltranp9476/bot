@@ -36,6 +36,7 @@ class Welcome extends CI_Controller
 		$group = $request->message->chat->username;
 		$chatId = $request->message->chat->id;
 		$fromUser = $request->message->from->username;
+		$fromName = $request->message->from->name;
 		$fromId = $request->message->from->id;
 		$type = $request->message->chat->type;
 		$text = $request->message->text;
@@ -60,7 +61,12 @@ class Welcome extends CI_Controller
 					if (!$personalizado == '') {
 						$mensaje = $this->parseText($config->message_user_add);
 					} else {
-						$mensaje = "Hola @$fromUser, no puedes escribir en este grupo hasta que no agregues contactos. Faltan *$total*.";
+						if ($fromUser == '') {
+							$nombre = $fromName;
+						} else {
+							$nombre = $fromName . '(' . $fromUser . ')';
+						}
+						$mensaje = "Hola $nombre, no puedes escribir en este grupo hasta que no agregues contactos. Faltan *$total*.";
 					}
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
