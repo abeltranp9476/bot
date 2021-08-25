@@ -62,7 +62,7 @@ class Welcome extends CI_Controller
 						$mensaje = $this->parseText($config->message_user_add);
 					} else {
 						if ($fromUser == '') {
-							$nombre = $fromName;
+							$nombre = "*$fromName*";
 						} elseif (!$fromName == '') {
 							$nombre = '*' . $fromName . '* (@' . $fromUser . ')';
 						} else {
