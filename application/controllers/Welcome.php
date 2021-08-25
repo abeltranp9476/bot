@@ -63,8 +63,10 @@ class Welcome extends CI_Controller
 					} else {
 						if ($fromUser == '') {
 							$nombre = $fromName;
-						} else {
+						} elseif (!$fromName == '') {
 							$nombre = '*' . $fromName . '* (@' . $fromUser . ')';
+						} else {
+							$nombre = "@$fromUser";
 						}
 						$mensaje = "Hola $nombre, no puedes escribir en este grupo hasta que no agregues contactos. Faltan *$total*.";
 					}
