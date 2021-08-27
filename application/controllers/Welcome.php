@@ -55,11 +55,11 @@ class Welcome extends CI_Controller
 			$this->useradd = $config->users_add;
 
 			if ($fromUser == '') {
-				$nombre = "*$fromName*";
+				$nombre = '*' . $this->markdownEscape($fromName) . '*';
 			} elseif (!$fromName == '') {
-				$nombre = '*' . $fromName . '* (@' . $fromUser . ')';
+				$nombre = '*' . $this->markdownEscape($fromName) . '* (@' . $this->markdownEscape($fromUser) . ')';
 			} else {
-				$nombre = "@$fromUser`";
+				$nombre = '@' . $this->markdownEscape($fromUser);
 			}
 
 			if ($config->active && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
@@ -756,6 +756,15 @@ __%remaning%__ - Cuántos faltan";
 		$text = preg_replace("/%remaning%/", $total, $text);
 		$text = preg_replace("/%total%/", $this->useradd, $text);
 		return $text;
+	}
+
+	private function markdownEscape($text)
+	{
+		return str_replace([
+			'\\', '-', '#', '*', '+', '`', '.', '[', ']', '(', ')', '!', '&', '<', '>', '_', '{', '}',
+		], [
+			'\\\\', '\-', '\#', '\*', '\+', '\`', '\.', '\[', '\]', '\(', '\)', '\!', '\&', '\<', '\>', '\_', '\{', '\}',
+		], $text);
 	}
 
 	private function cleanGroupName($group)
