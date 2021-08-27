@@ -90,7 +90,8 @@ class Welcome extends CI_Controller
 				$telegram->sendMessage([
 					'chat_id' => $chatId,
 					'text' => "Hola $nombre, no están permitido enlaces ni menciones en este grupo.",
-					'reply_markup' => $reply_markup
+					'reply_markup' => $reply_markup,
+					'parse_mode' => 'markdown'
 				]);
 				exit;
 			}
@@ -104,7 +105,8 @@ class Welcome extends CI_Controller
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
 						'text' => "Hola $nombre, no puedes agregar bots al grupo.",
-						'reply_markup' => $reply_markup
+						'reply_markup' => $reply_markup,
+						'parse_mode' => 'markdown'
 					]);
 					exit;
 				}
