@@ -744,12 +744,12 @@ __%remaning%__ - Cuántos faltan";
 	private function parseText($text)
 	{
 		$total = $this->useradd  - $this->userCounter;
-		if ($this->fromUser === '') {
-			$nombre = "*$this->fromName*";
-		} elseif (!$this->fromName === '') {
-			$nombre = '*' . $this->fromName . '* (@' . $this->fromUser . ')';
+		if ($fromUser == '') {
+			$nombre = '*' . $this->markdownEscape($fromName) . '*';
+		} elseif (!$fromName == '') {
+			$nombre = '*' . $this->markdownEscape($fromName) . '* (@' . $this->markdownEscape($fromUser) . ')';
 		} else {
-			$nombre = "@$this->fromUser";
+			$nombre = '@' . $this->markdownEscape($fromUser);
 		}
 		$text = preg_replace("/%user%/", $nombre, $text);
 		$text = preg_replace("/%counter%/", $this->userCounter, $text);
