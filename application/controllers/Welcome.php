@@ -732,9 +732,9 @@ __%remaning%__ - Cuántos faltan";
 	private function parseText($text)
 	{
 		$total = $this->useradd  - $this->userCounter;
-		if ($this->fromUser == '') {
+		if ($this->fromUser === '') {
 			$nombre = "*$this->fromName*";
-		} elseif (!$this->fromName == '') {
+		} elseif (!$this->fromName === '') {
 			$nombre = '*' . $this->fromName . '* (@' . $this->fromUser . ')';
 		} else {
 			$nombre = "@$this->fromUser";
