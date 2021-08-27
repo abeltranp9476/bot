@@ -744,13 +744,14 @@ __%remaning%__ - Cuántos faltan";
 	private function parseText($text)
 	{
 		$total = $this->useradd  - $this->userCounter;
-		if ($fromUser == '') {
-			$nombre = '*' . $this->markdownEscape($fromName) . '*';
-		} elseif (!$fromName == '') {
-			$nombre = '*' . $this->markdownEscape($fromName) . '* (@' . $this->markdownEscape($fromUser) . ')';
+		if ($this->fromUser == '') {
+			$nombre = '*' . $this->markdownEscape($this->fromName) . '*';
+		} elseif (!$this->fromName == '') {
+			$nombre = '*' . $this->markdownEscape($this->fromName) . '* (@' . $this->markdownEscape($this->fromUser) . ')';
 		} else {
-			$nombre = '@' . $this->markdownEscape($fromUser);
+			$nombre = '@' . $this->markdownEscape($this->fromUser);
 		}
+
 		$text = preg_replace("/%user%/", $nombre, $text);
 		$text = preg_replace("/%counter%/", $this->userCounter, $text);
 		$text = preg_replace("/%remaning%/", $total, $text);
