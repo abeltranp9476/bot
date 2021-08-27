@@ -53,9 +53,9 @@ class Welcome extends CI_Controller
 
 		$this->useradd = $config->users_add;
 
-		if ($fromUser == '') {
+		if ($fromUser === '') {
 			$nombre = "*$fromName*";
-		} elseif (!$fromName == '') {
+		} elseif (!$fromName === '') {
 			$nombre = '*' . $fromName . '* (@' . $fromUser . ')';
 		} else {
 			$nombre = "@$fromUser";
@@ -63,7 +63,7 @@ class Welcome extends CI_Controller
 
 		if ($config->active && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
 			if (!$this->isRecommendedAll($group, $fromId)) {
-				if ($config->is_users_add && !$text == '') {
+				if ($config->is_users_add && !$text === '') {
 					$this->delete($textId, $chatId);
 					$reply_markup = $telegram->replyKeyboardHide();
 					$total = $config->users_add - $this->userCounter;
