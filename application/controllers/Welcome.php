@@ -55,11 +55,11 @@ class Welcome extends CI_Controller
 			$this->useradd = $config->users_add;
 
 			if ($fromUser == '') {
-				$nombre = "*$fromName*";
+				$nombre = "*`$fromName`*";
 			} elseif (!$fromName == '') {
-				$nombre = '*' . $fromName . '* (@' . $fromUser . ')';
+				$nombre = '*' . `$fromName` . '* (@' . `$fromUser` . ')';
 			} else {
-				$nombre = "@$fromUser";
+				$nombre = "@`$fromUser`";
 			}
 
 			if ($config->active && !$this->isExclusion($fromUser, $group) && $this->CheckType($type)) {
