@@ -72,7 +72,7 @@ class Welcome extends CI_Controller
 						if (!$personalizado == '') {
 							$mensaje = $this->parseText($config->message_user_add);
 						} else {
-							$mensaje = "Hola \$nombre\, no puedes escribir en este grupo hasta que no agregues contactos. Faltan *$total*.";
+							$mensaje = "Hola \$nombre, no puedes escribir en este grupo hasta que no agregues contactos. Faltan *$total*.";
 						}
 						$telegram->sendMessage([
 							'chat_id' => $chatId,
@@ -90,7 +90,7 @@ class Welcome extends CI_Controller
 					$reply_markup = $telegram->replyKeyboardHide();
 					$telegram->sendMessage([
 						'chat_id' => $chatId,
-						'text' => "Hola \$nombre\, no están permitido enlaces ni menciones en este grupo.",
+						'text' => "Hola \$nombre, no están permitido enlaces ni menciones en este grupo.",
 						'reply_markup' => $reply_markup,
 						'parse_mode' => 'markdown'
 					]);
@@ -105,7 +105,7 @@ class Welcome extends CI_Controller
 						$reply_markup = $telegram->replyKeyboardHide();
 						$telegram->sendMessage([
 							'chat_id' => $chatId,
-							'text' => "Hola \$nombre\, no puedes agregar bots al grupo.",
+							'text' => "Hola \$nombre, no puedes agregar bots al grupo.",
 							'reply_markup' => $reply_markup,
 							'parse_mode' => 'markdown'
 						]);
