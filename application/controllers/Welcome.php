@@ -11,7 +11,7 @@ class Welcome extends CI_Controller
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas'],
 		//['username' => 'GroupAnonymousBot', 'group' => 'detectongrupo'],
 		['username' => 'GroupAnonymousBot', 'group' => 'revolicompraventa'],
-		['username' => 'MisaelParets', 'group' => 'CompraventaenlaHabana']
+		['username' => 'MisaelParets', 'group' => 'compraventarticulo']
 	];
 
 
