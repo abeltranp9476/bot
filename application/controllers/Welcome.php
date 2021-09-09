@@ -13,7 +13,7 @@ class Welcome extends CI_Controller
 		['username' => 'GroupAnonymousBot', 'group' => 'revolicompraventa'],
 		['username' => 'MisaelParets', 'group' => 'compraventarticulo'],
 		['username' => 'Loreaniel', 'group' => 'compraventarticulo'],
-		['username' => 'Lalapopsy', 'group' => 'compraventarticulo']
+		['username' => 'Laurita_Lalapopsy', 'group' => 'compraventarticulo']
 	];
 
 
