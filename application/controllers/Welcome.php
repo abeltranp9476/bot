@@ -8,12 +8,7 @@ class Welcome extends CI_Controller
 	public $token = '1952735008:AAEcF3zzCcoZINMnJUxipmQd4tS6PFR2EN0';
 
 	public $listsExclusion = [
-		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas'],
-		//['username' => 'GroupAnonymousBot', 'group' => 'detectongrupo'],
-		['username' => 'GroupAnonymousBot', 'group' => 'revolicompraventa'],
-		['username' => 'MisaelParets', 'group' => 'compraventarticulo'],
-		['username' => 'Loreaniel', 'group' => 'compraventarticulo'],
-		['username' => 'Laurita_Lalapopsy', 'group' => 'compraventarticulo']
+
 	];
 
 
