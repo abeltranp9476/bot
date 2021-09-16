@@ -5,7 +5,7 @@ use Telegram\Bot\Api;
 
 class Welcome extends CI_Controller
 {
-	public $token = '705632855:AAGOUkE4ChdBepPAaZj9C-afmOsDRkmFKOM';
+	public $token = '1952735008:AAEcF3zzCcoZINMnJUxipmQd4tS6PFR2EN0';
 
 	public $listsExclusion = [
 		['username' => 'GroupAnonymousBot', 'group' => 'comprayventadecasas'],
