@@ -24,7 +24,7 @@ class Welcome extends CI_Controller
 
 	public function index()
 	{
-		echo "Bot Server";
+		echo "Bot Server test";
 	}
 
 
